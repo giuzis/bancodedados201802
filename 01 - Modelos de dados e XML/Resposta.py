@@ -6,8 +6,8 @@ import os
 import csv
 
 # Cria pasta dadosMarvel
-#newpath = r'/home/giuliana/Documents/bando de dados/db201802/01 - Modelos de dados e XML/dadosMarvel'
-#os.makedirs(newpath)
+newpath = r'/home/giuliana/Documents/bando de dados/db201802/01 - Modelos de dados e XML/dadosMarvel'
+os.makedirs(newpath)
 
 # Abre o XML com o minidom parser
 DOMTree = xml.dom.minidom.parse("marvel_simplificado.xml")
@@ -46,6 +46,7 @@ for hero in heroes:
    energy_Projection = hero.getElementsByTagName('energy_Projection')[0]
    fighting_Skills = hero.getElementsByTagName('fighting_Skills')[0]
 
+   # Escreve na listaInterna_todos as informacoes dos herois
    listaInterna_todos = []
    listaInterna_todos.append(numero_herois)
    listaInterna_todos.append(name.childNodes[0].data)
@@ -61,6 +62,7 @@ for hero in heroes:
    listaInterna_todos.append(durability.childNodes[0].data)
    listaInterna_todos.append(energy_Projection.childNodes[0].data)
    listaInterna_todos.append(fighting_Skills.childNodes[0].data)
+   # Adiciona a listaTodos a listaInterna_todos
    listaTodos.append(listaInterna_todos)
 
    # Coleta as informacoes do Hulk
@@ -74,6 +76,8 @@ for hero in heroes:
    # Soma o numero de herois bons/maus a cada iteracao
    if alignment.childNodes[0].data == 'Good':
       numero_bons += 1
+
+      # Escreve na listaInterna_bons as informacoes dos herois
       listaInterna_bons = []
       listaInterna_bons.append(numero_bons)
       listaInterna_bons.append(name.childNodes[0].data)
@@ -89,6 +93,7 @@ for hero in heroes:
       listaInterna_bons.append(durability.childNodes[0].data)
       listaInterna_bons.append(energy_Projection.childNodes[0].data)
       listaInterna_bons.append(fighting_Skills.childNodes[0].data)
+      # Adiciona a listaBons a listaInterna_bons
       listaBons.append(listaInterna_bons)
    elif alignment.childNodes[0].data == 'Bad':
       numero_maus += 1
