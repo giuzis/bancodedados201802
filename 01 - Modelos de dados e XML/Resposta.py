@@ -6,7 +6,7 @@ import os
 import csv
 
 # Cria pasta dadosMarvel
-newpath = r'/home/matheus/bd_project/db201802/01 - Modelos de dados e XML/dadosMarvel'
+newpath = r'/home/alexandre/db201802/01 - Modelos de dados e XML/dadosMarvel'
 os.makedirs(newpath)
 
 # Abre o XML com o minidom parser
@@ -121,12 +121,12 @@ for hero in heroes:
       listaMaus.append(listaInterna_maus)
 
 #calcula informacoes pedidas
-proporcao = numero_bons/numero_maus
-print("Proporcao Bons/Maus %s" % proporcao)
-media = peso/numero_herois
-print("Media dos pesos: %s" % media)
-mmc_hulk = peso_hulk/(altura_hulk**2)
-print("MMC do Hulk: %s" % mmc_hulk)
+proporcao = (float(numero_bons)/float(numero_maus))
+print("Proporcao Bons/Maus %ls" % proporcao)
+media = (float(peso)/float(numero_herois))
+print("Media dos pesos: %ls" % media)
+mmc_hulk = (float(peso_hulk)/(float(altura_hulk)**2))
+print("MMC do Hulk: %ls" % mmc_hulk)
 
 # Gera arquivos csv
 with open("dadosMarvel/herois.csv",'w') as csvfile:
