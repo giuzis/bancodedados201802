@@ -6,7 +6,7 @@ import os
 import csv
 
 # Cria pasta dadosMarvel
-newpath = r'/home/giuliana/Documents/bando de dados/db201802/01 - Modelos de dados e XML/dadosMarvel'
+newpath = r'/home/alexandre/PycharmProjects/Programinhapython/dadosMarvel'
 os.makedirs(newpath)
 
 # Abre o XML com o minidom parser
@@ -27,11 +27,13 @@ altura_hulk = 0
 # Cria listas para escrever no arquivo csv
 listaTodos = []
 listaBons = []
+listaMaus = []
 
 # Pega as informacoes dos herois
 for hero in heroes:
    # Conta o numero de herois somando a cada iteracao
    numero_herois += 1
+   id = str(hero.getAttribute("id"))
    name = hero.getElementsByTagName('name')[0]
    popularity = hero.getElementsByTagName('popularity')[0]
    alignment = hero.getElementsByTagName('alignment')[0]
@@ -48,7 +50,7 @@ for hero in heroes:
 
    # Escreve na listaInterna_todos as informacoes dos herois
    listaInterna_todos = []
-   listaInterna_todos.append(numero_herois)
+   listaInterna_todos.append(id)
    listaInterna_todos.append(name.childNodes[0].data)
    listaInterna_todos.append(popularity.childNodes[0].data)
    listaInterna_todos.append(alignment.childNodes[0].data)
@@ -79,7 +81,7 @@ for hero in heroes:
 
       # Escreve na listaInterna_bons as informacoes dos herois
       listaInterna_bons = []
-      listaInterna_bons.append(numero_bons)
+      listaInterna_bons.append(id)
       listaInterna_bons.append(name.childNodes[0].data)
       listaInterna_bons.append(popularity.childNodes[0].data)
       listaInterna_bons.append(alignment.childNodes[0].data)
@@ -98,6 +100,25 @@ for hero in heroes:
    elif alignment.childNodes[0].data == 'Bad':
       numero_maus += 1
 
+      #Cria a lista de herois maus
+      listaInterna_maus = []
+      listaInterna_maus.append(id)
+      listaInterna_maus.append(name.childNodes[0].data)
+      listaInterna_maus.append(popularity.childNodes[0].data)
+      listaInterna_maus.append(alignment.childNodes[0].data)
+      listaInterna_maus.append(gender.childNodes[0].data)
+      listaInterna_maus.append(height_m.childNodes[0].data)
+      listaInterna_maus.append(weight_kg.childNodes[0].data)
+      listaInterna_maus.append(hometown.childNodes[0].data)
+      listaInterna_maus.append(intelligence.childNodes[0].data)
+      listaInterna_maus.append(strength.childNodes[0].data)
+      listaInterna_maus.append(speed.childNodes[0].data)
+      listaInterna_maus.append(durability.childNodes[0].data)
+      listaInterna_maus.append(energy_Projection.childNodes[0].data)
+      listaInterna_maus.append(fighting_Skills.childNodes[0].data)
+      # Adiciona a lista maus a listaInterna_maus
+      listaMaus.append(listaInterna_maus)
+
 proporcao = numero_bons/numero_maus
 print("Proporcao Bons/Maus %s" % proporcao)
 media = peso/numero_herois
@@ -106,12 +127,18 @@ mmc_hulk = peso_hulk/(altura_hulk**2)
 print("MMC do Hulk: %s" % mmc_hulk)
 
 # Gera arquivos csv
-with open("dadosMarvel/herois.csv",'wb') as csvfile:
+with open("dadosMarvel/herois.csv",'w') as csvfile:
    writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
    for linha in listaTodos:
       writer.writerow(linha)
 
-with open("dadosMarvel/herois_good.csv",'wb') as csvfile:
+with open("dadosMarvel/herois_good.csv",'w') as csvfile:
    writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
    for linha in listaBons:
       writer.writerow(linha)
+
+with open("dadosMarvel/herois_bad.csv",'w') as csvfile:
+    writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+    for linha in listaMaus:
+      writer.writerow(linha)
+    
