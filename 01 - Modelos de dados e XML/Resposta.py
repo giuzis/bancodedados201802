@@ -6,7 +6,7 @@ import os
 import csv
 
 # Cria pasta dadosMarvel
-newpath = r'/home/alexandre/PycharmProjects/Programinhapython/dadosMarvel'
+newpath = r'/home/matheus/bd_project/db201802/01 - Modelos de dados e XML/dadosMarvel'
 os.makedirs(newpath)
 
 # Abre o XML com o minidom parser
@@ -17,6 +17,7 @@ universe = DOMTree.documentElement
 # Pega todos os herois do universo
 heroes = universe.getElementsByTagName("hero")
 
+#Inicializa variaveis
 numero_herois = 0
 numero_bons = 0
 numero_maus = 0
@@ -116,9 +117,10 @@ for hero in heroes:
       listaInterna_maus.append(durability.childNodes[0].data)
       listaInterna_maus.append(energy_Projection.childNodes[0].data)
       listaInterna_maus.append(fighting_Skills.childNodes[0].data)
-      # Adiciona a lista maus a listaInterna_maus
+      # Adiciona na listaMaus a listaInterna_maus
       listaMaus.append(listaInterna_maus)
 
+#calcula informacoes pedidas
 proporcao = numero_bons/numero_maus
 print("Proporcao Bons/Maus %s" % proporcao)
 media = peso/numero_herois
@@ -141,4 +143,3 @@ with open("dadosMarvel/herois_bad.csv",'w') as csvfile:
     writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
     for linha in listaMaus:
       writer.writerow(linha)
-    
