@@ -4,17 +4,67 @@ CREATE DATABASE projeto_teste;
 		Login VARCHAR(15) NOT NULL
 		Nome_Completo VARCHAR(100) NOT NULl
 		Cidade_Natal VARCHAR(50)
-		Data_Nascimento	
-		PRIMARY KEY (Login)
+		Data_Nascimento	DATE
+		PRIMARY KEY (Login) 
 	);
 
 	CREATE TABLE Bloqueia 
 	(
 		Login1 VARCHAR(15) NOT NULL
 		Login2 VARCHAR(15) NOT NULL
-		Motivo
-		FOREIGN KEY(Login1)
-		FOREIGN KEY(Login2)
+		Motivo VARCHAR(255)
+		FOREIGN KEY(Login1) REFERENCES Pessoa(login)
+		    ON DELETE   NO ACTION
+		    ON UPDATE   NO ACTION
+		FOREIGN KEY(Login2) REFERENCES Pessoa(login)
+		    ON DELETE   NO ACTION
+		    ON UPDATE   NO ACTION
+	);
+	
+	CREATE TABLE Conhece
+	(
+	    Login1 VARCHAR(15) NOT NULL
+	    Login2 VARCHAR(15) NOT NULL
+	    FOREIGN KEY(Login1) REFERENCES Pessoa(login)
+		    ON DELETE   NO ACTION
+		    ON UPDATE   NO ACTION
+		FOREIGN KEY(Login2) REFERENCES Pessoa(login)
+		    ON DELETE   NO ACTION
+		    ON UPDATE   NO ACTION
+	);
+	
+	CREATE TABLE Categoria
+	(
+	    Nome VARCHAR(55) NOT NULL
+	    Categoria VARCHAR(55)
+	    FOREIGN KEY (Categoria) REFERENCES Categoria(Nome)
+	        ON DELETE NO ACTION 
+	        ON UPDATE NO ACTION
+	);
+	
+	CREATE TABLE Filmes
+	(
+	    ID INTEGER NOT NULL
+	    Nome VARCHAR(55) NOT NULL
+	    Data_de_Lançamento DATE 
+	    Categoria VARCHAR(55)
+	    PRIMARY KEY (ID)
+	    FOREIGN KEY (Categoria) REFERENCES Categoria(Nome)
+		    ON DELETE   NO ACTION
+		    ON UPDATE   NO ACTION
+	);
+	
+	CREATE TABLE Like_Filmes
+	(
+	    Login VARCHAR(15) NOT NULL
+	    ID INTEGER NOT NULL
+	    Nota INTEGER
+	    FOREIGN KEY (ID) REFERENCES Filmes(ID)
+	        ON DELETE
+	        ON UPDATE
+	   FOREIGN KEY (Login) REFERENCES Pessoa(Login)
+	        ON DELETE
+	        ON UPDATE
 	);
 	
 	CREATE TABLE Artista_Musical
