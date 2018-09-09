@@ -1,0 +1,23 @@
+CREATE DATABASE projeto_teste;
+	CREATE table Pessoa
+	(
+		Login VARCHAR(15) NOT NULL
+		Nome_Completo VARCHAR(100) NOT NULl
+		Cidade_Natal VARCHAR(50)
+		Data_Nascimento	
+		PRIMARY KEY (Login)
+	);
+
+	CREATE TABLE Bloqueia 
+	(
+		Login1 VARCHAR(15) NOT NULL
+		Login2 VARCHAR(15) NOT NULL
+		Motivo
+		FOREIGN KEY(Login1)
+		FOREIGN KEY(Login2)
+	);
+	
+	CREATE TABLE Artista_Musical
+	(
+		Nome
+	);
