@@ -1,0 +1,170 @@
+	CREATE table Pessoa
+	(
+		Login VARCHAR(15) NOT NULL,
+		Nome_Completo VARCHAR(100) NOT NULL,
+		Cidade_Natal VARCHAR(50),
+		Data_Nascimento	DATE,
+		PRIMARY KEY (Login) 
+	);
+
+	CREATE TABLE Bloqueia 
+	(
+		Login1 VARCHAR(15) NOT NULL,
+		Login2 VARCHAR(15) NOT NULL,
+		Motivo VARCHAR(255),
+		PRIMARY KEY (Login1, Login2),
+		FOREIGN KEY(Login1) REFERENCES Pessoa(Login)
+		    ON DELETE   NO ACTION
+		    ON UPDATE   NO ACTION,
+		FOREIGN KEY(Login2) REFERENCES Pessoa(Login)
+		    ON DELETE   NO ACTION
+		    ON UPDATE   NO ACTION
+	);
+	
+	CREATE TABLE Conhece
+	(
+	    Login1 VARCHAR(15) NOT NULL,
+	    Login2 VARCHAR(15) NOT NULL,
+	    PRIMARY KEY (Login1, Login2),
+	    FOREIGN KEY(Login1) REFERENCES Pessoa(login)
+		    ON DELETE   NO ACTION
+		    ON UPDATE   NO ACTION,
+		FOREIGN KEY(Login2) REFERENCES Pessoa(login)
+		    ON DELETE   NO ACTION
+		    ON UPDATE   NO ACTION
+	);
+	
+	CREATE TABLE Categoria
+	(
+	    Nome VARCHAR(55) NOT NULL,
+	    Categoria VARCHAR(55),
+	    PRIMARY KEY (Nome),
+	    FOREIGN KEY (Categoria) REFERENCES Categoria(Nome)
+	        ON DELETE NO ACTION 
+	        ON UPDATE NO ACTION
+	);
+	
+	CREATE TABLE Filmes
+	(
+	    ID INTEGER NOT NULL,
+	    Nome VARCHAR(55) NOT NULL,
+	    Data_de_Lançamento DATE,
+	    Categoria VARCHAR(55),
+	    PRIMARY KEY (ID),
+	    FOREIGN KEY (Categoria) REFERENCES Categoria(Nome)
+		    ON DELETE   NO ACTION
+		    ON UPDATE   NO ACTION
+	);
+	
+	CREATE TABLE Like_Filmes
+	(
+	    Login VARCHAR(15) NOT NULL,
+	    ID INTEGER NOT NULL,
+	    Nota INTEGER,
+	    PRIMARY KEY (Login, ID),
+	    FOREIGN KEY (ID) REFERENCES Filmes(ID)
+	        ON DELETE NO ACTION
+	        ON UPDATE NO ACTION,
+	   FOREIGN KEY (Login) REFERENCES Pessoa(Login)
+	        ON DELETE NO ACTION
+	        ON UPDATE NO ACTION
+	);
+	
+	CREATE TABLE Artista_Musical
+	(
+		ID INTEGER NOT NULL,
+		Genero_Musical VARCHAR(50) NOT NULL,
+		Nome_Artistico VARCHAR(55) NOT NULL,
+		Pais VARCHAR(50) NOT NULL,
+		PRIMARY KEY (ID)
+	);
+	
+	CREATE TABLE Like_Artista
+	(
+	    Login VARCHAR(15) NOT NULL,
+	    ID INTEGER NOT NULL,
+	    Nota INTEGER NOT NULL,
+	    PRIMARY KEY (Login, ID)
+	    FOREIGN KEY (Login) REFERENCES Pessoa(Login)
+	        ON DELETE NO ACTION
+	        ON UPDATE NO ACTION
+	);
+	
+	CREATE TABLE Cantor
+	(
+	    ID INTEGER NOT NULL,
+	    PRIMARY KEY (ID),
+	    FOREIGN KEY (ID) REFERENCES Artista_Musical (ID)
+	        ON DELETE NO ACTION
+	        ON UPDATE NO ACTION
+	);
+	
+	CREATE TABLE Banda
+	(
+	    ID INTEGER NOT NULL,
+	    PRIMARY KEY (ID),
+	    FOREIGN KEY (ID) REFERENCES Artista_Musical (ID)
+	        ON DELETE NO ACTION
+	        ON UPDATE NO ACTION
+	);
+	
+	CREATE TABLE Musico
+	(
+	    Nome_Real VARCHAR(55) NOT NULL,
+	    Estilo_Musical VARCHAR(55) NOT NULL,
+	    Data_Nascimento DATE NOT NULL,
+	    IDCantor INTEGER NOT NULL,
+	    IDBanda INTEGER NOT NULL,
+	    PRIMARY KEY (IDCantor, IDBanda),
+	    FOREIGN KEY (IDCantor) REFERENCES Cantor(ID)
+	        ON DELETE NO ACTION
+	        ON UPDATE NO ACTION,
+	    FOREIGN KEY (IDBanda) REFERENCES Banda(ID)
+	        ON DELETE NO ACTION
+	        ON UPDATE NO ACTION
+	);
+	
+		CREATE TABLE Membros
+	(
+	    ID INTEGER NOT NULL,
+	    TELEFONE INTEGER,
+	    ENDERECO VARCHAR(50),
+	    PRIMARY KEY (ID)
+	);
+	
+	CREATE TABLE Atores
+	(
+	    ID INTEGER NOT NULL,
+	    TELEFONE INTEGER,
+	    ENDERECO VARCHAR(50),
+	    PRIMARY KEY (ID),
+	    FOREIGN KEY (ID) REFERENCES Membros(ID)
+	);
+	
+	CREATE TABLE Diretor
+	(
+	    ID INTEGER NOT NULL,
+	    TELEFONE INTEGER,
+	    ENDERECO VARCHAR(50),
+	    PRIMARY KEY (ID),
+	    FOREIGN KEY (ID) REFERENCES Membros(ID)
+	);
+
+
+    CREATE TABLE Atua_Filmes
+    (
+        ID_Ator INTEGER NOT NULL,
+        ID_Filmes INTEGER NOT NULL,
+        PRIMARY KEY (ID_Ator, ID_Filmes),
+        FOREIGN KEY (ID_Ator) REFERENCES Atores(ID),
+        FOREIGN KEY (ID_Filmes) REFERENCES Filmes(ID)
+    );
+    
+    CREATE TABLE Dirige_Filmes
+    (
+        ID_Diretor INTEGER NOT NULL,
+        ID_Filmes INTEGER NOT NULL,
+        PRIMARY KEY (ID_Diretor, ID_Filmes),
+        FOREIGN KEY (ID_Diretor) REFERENCES Diretor(ID),
+        FOREIGN KEY (ID_Filmes) REFERENCES Filmes(ID)
+    );
