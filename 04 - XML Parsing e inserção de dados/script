@@ -38,6 +38,7 @@
 	(
 	    Nome VARCHAR(55) NOT NULL,
 	    Categoria VARCHAR(55),
+	    PRIMARY KEY (Nome),
 	    FOREIGN KEY (Categoria) REFERENCES Categoria(Nome)
 	        ON DELETE NO ACTION 
 	        ON UPDATE NO ACTION
@@ -60,7 +61,7 @@
 	    Login VARCHAR(15) NOT NULL,
 	    ID INTEGER NOT NULL,
 	    Nota INTEGER,
-	    PRIMAY KEY (Login, ID),
+	    PRIMARY KEY (Login, ID),
 	    FOREIGN KEY (ID) REFERENCES Filmes(ID)
 	        ON DELETE NO ACTION
 	        ON UPDATE NO ACTION,
@@ -140,7 +141,7 @@
 	    FOREIGN KEY (ID) REFERENCES Membros(ID)
 	);
 	
-	CREATE TABLE Diretores
+	CREATE TABLE Diretor
 	(
 	    ID INTEGER NOT NULL,
 	    TELEFONE INTEGER,
