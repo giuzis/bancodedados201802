@@ -36,11 +36,37 @@ for pessoa in turma:
 	datanascimento = "'" + pessoa.getAttribute("birthdate") + "'"
 	if (pessoa.getAttribute("birthdate") == ''):
 		datanascimento = "NULL"
- 	else:
-		try:
- 			cur.execute("INSERT INTO pessoa VALUES (" + login + ", " + nome + ", " + cidadenatal + ", " + datanascimento + ");")
-		except Exception as e:
- 			print "Nao consegui inserir :("
- 			print e
+	try:
+ 		cur.execute("INSERT INTO pessoa VALUES (" + login + ", " + nome + ", " + cidadenatal + ", " + datanascimento + ");")
+	except Exception as e:
+ 		print "Nao consegui inserir :("
+ 		print e
+ 	conn.commit()
+
+DOMTree2 = xml.dom.minidom.parse(urllib.urlopen(Artistas_url))
+AllLikesMusic = DOMTree2.documentElement
+
+musicaturma = AllLikesMusic.getElementsByTagName("LikesMusic")
+
+for musica in musicaturma:
+	string1 = 'http://utfpr.edu.br/CSB30/2018/2/'
+	login = "'" + str(musica.getAttribute("person")).replace(string1,'') + "'"
+	nota = musica.getAttribute("rating")
+	idbanda = "'" + musica.getAttribute("bandUri") + "'"
+	string2 = 'https://en.wikipedia.org/wiki/'
+	nomebanda = "'" + str(musica.getAttribute("bandUri")).replace(string2,'') + "'"
+	try:
+ 		cur.execute("INSERT INTO artista_musical VALUES (" + idbanda + ", " + "NULL" + ", " + nomebanda + ", " + "NULL" + ");")
+	except Exception as e:
+ 		print "Nao consegui inserir :("
+ 		print e
+ 	conn.commit()
+ 	try:
+ 		cur.execute("INSERT INTO like_artista VALUES (" + login + ", " + idbanda + ", " + nota + ");")
+	except Exception as e:
+ 		print "Nao consegui inserir :("
+ 		print e
  	conn.commit()
 	
+
+
