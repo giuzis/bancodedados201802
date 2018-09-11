@@ -2,7 +2,10 @@
 
 from xml.dom.minidom import parse
 import xml.dom.minidom
-import urllib.request
+import urllib
+import urllib2
+import psycopg2
+import psycopg2.extras 
 
 Pessoas_url = 'http://dainf.ct.utfpr.edu.br/~gomesjr/BD1/data/person.xml'
 Artistas_url = 'http://dainf.ct.utfpr.edu.br/~gomesjr/BD1/data/music.xml'
@@ -11,12 +14,12 @@ Conhecidos = 'http://dainf.ct.utfpr.edu.br/~gomesjr/BD1/data/knows.xml'
 
 
 # Parte 1 - Leitura de Pessoas
-DOMTree = xml.dom.minidom.parse(urllib.request.urlopen(Pessoas_url))
-pessoas = DOMTree.documentElement
+DOMTree = xml.dom.minidom.parse(urllib.urlopen(Pessoas_url))
+Persons = DOMTree.documentElement
 
-turma = pessoas.getElementsByTagName("person")
-for person in turma:
-	name =  turma.getElementsByTagName('name')[0]
-	print ("Nome: %s" % name.childNodes[7].data)	
+turma = Persons.getElementsByTagName("Person")
 
-	me mata senhor
+for pessoa in turma:
+	string = 'http://utfpr.edu.br/CSB30/2018/2/'
+	login = str(pessoa.getAttribute("uri")).replace(string,'')
+	print("login: " + login + ", nome: " + pessoa.getAttribute("name") + ", cidade: " + pessoa.getAttribute("hometown") + ", data de nascimento: " + pessoa.getAttribute("birthdate"))
