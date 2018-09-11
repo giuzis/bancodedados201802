@@ -28,16 +28,17 @@ cur = conn.cursor()
 
 for pessoa in turma:
 	string = 'http://utfpr.edu.br/CSB30/2018/2/'
-	login = str(pessoa.getAttribute("uri")).replace(string,'')
+	login = "'" + str(pessoa.getAttribute("uri")).replace(string,'') + "'"
+	nome = "'" + pessoa.getAttribute("name") + "'"
+	cidadenatal = "'" + pessoa.getAttribute("hometown") + "'"
+	if (pessoa.getAttribute("hometown") == ''):
+		cidadenatal = "NULL"
+	datanascimento = "'" + pessoa.getAttribute("birthdate") + "'"
 	if (pessoa.getAttribute("birthdate") == ''):
-		try:
- 			cur.execute("INSERT INTO pessoa VALUES ('" + login + "', '" + pessoa.getAttribute("name") + "', '" + pessoa.getAttribute("hometown") + "', '20018-01-01');")
-		except Exception as e:
- 			print "Nao consegui inserir :("
- 			print e
+		datanascimento = "NULL"
  	else:
 		try:
- 			cur.execute("INSERT INTO pessoa VALUES ('" + login + "', '" + pessoa.getAttribute("name") + "', '" + pessoa.getAttribute("hometown") + "', '" + pessoa.getAttribute("birthdate") + "');")
+ 			cur.execute("INSERT INTO pessoa VALUES (" + login + ", " + nome + ", " + cidadenatal + ", " + datanascimento + ");")
 		except Exception as e:
  			print "Nao consegui inserir :("
  			print e
