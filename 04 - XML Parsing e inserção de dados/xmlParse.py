@@ -22,4 +22,31 @@ turma = Persons.getElementsByTagName("Person")
 for pessoa in turma:
 	string = 'http://utfpr.edu.br/CSB30/2018/2/'
 	login = str(pessoa.getAttribute("uri")).replace(string,'')
-	print("login: " + login + ", nome: " + pessoa.getAttribute("name") + ", cidade: " + pessoa.getAttribute("hometown") + ", data de nascimento: " + pessoa.getAttribute("birthdate"))
+#	print("login: " + login + ", nome: " + pessoa.getAttribute("name") + ", cidade: " + pessoa.getAttribute("hometown") + ", data de nascimento: " + pessoa.getAttribute("birthdate"))
+#	print("INSERT INTO pessoa VALUES ('" + login + "', '" + pessoa.getAttribute("name") + "', '" + pessoa.getAttribute("hometown") + "', '" + pessoa.getAttribute("birthdate") + "');")
+#	print(pessoa.getAttribute("birthdate"))
+
+try:
+ 	conn = psycopg2.connect("dbname='1802BandoDeDados' user='1802BandoDeDados' host='200.134.10.32' password='803322'")
+except:
+ 	print "I am unable to connect to the database."
+
+cur = conn.cursor()
+
+for pessoa in turma:
+	string = 'http://utfpr.edu.br/CSB30/2018/2/'
+	login = str(pessoa.getAttribute("uri")).replace(string,'')
+	if (pessoa.getAttribute("birthdate") == ''):
+		try:
+ 			cur.execute("INSERT INTO pessoa VALUES ('" + login + "', '" + pessoa.getAttribute("name") + "', '" + pessoa.getAttribute("hometown") + "', '20018-01-01');")
+		except Exception as e:
+ 			print "Nao consegui inserir :("
+ 			print e
+ 	else:
+		try:
+ 			cur.execute("INSERT INTO pessoa VALUES ('" + login + "', '" + pessoa.getAttribute("name") + "', '" + pessoa.getAttribute("hometown") + "', '" + pessoa.getAttribute("birthdate") + "');")
+		except Exception as e:
+ 			print "Nao consegui inserir :("
+ 			print e
+ 	conn.commit()
+	
