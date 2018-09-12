@@ -1,6 +1,6 @@
 	CREATE table Pessoa
 	(
-		Login VARCHAR(15) NOT NULL,
+		Login VARCHAR(50) NOT NULL,
 		Nome_Completo VARCHAR(100) NOT NULL,
 		Cidade_Natal VARCHAR(50),
 		Data_Nascimento	DATE,
@@ -9,8 +9,8 @@
 
 	CREATE TABLE Bloqueia 
 	(
-		Login1 VARCHAR(15) NOT NULL,
-		Login2 VARCHAR(15) NOT NULL,
+		Login1 VARCHAR(50) NOT NULL,
+		Login2 VARCHAR(50) NOT NULL,
 		Motivo VARCHAR(255),
 		PRIMARY KEY (Login1, Login2),
 		FOREIGN KEY(Login1) REFERENCES Pessoa(Login)
@@ -23,8 +23,8 @@
 	
 	CREATE TABLE Conhece
 	(
-	    Login1 VARCHAR(15) NOT NULL,
-	    Login2 VARCHAR(15) NOT NULL,
+	    Login1 VARCHAR(50) NOT NULL,
+	    Login2 VARCHAR(50) NOT NULL,
 	    PRIMARY KEY (Login1, Login2),
 	    FOREIGN KEY(Login1) REFERENCES Pessoa(login)
 		    ON DELETE   NO ACTION
@@ -46,7 +46,7 @@
 	
 	CREATE TABLE Filmes
 	(
-	    ID VARCHAR(255) NOT NULL,
+	    ID VARCHAR(50) NOT NULL,
 	    Nome VARCHAR(55) NOT NULL,
 	    Data_de_Lançamento DATE,
 	    Categoria VARCHAR(55),
@@ -58,8 +58,8 @@
 	
 	CREATE TABLE Like_Filmes
 	(
-	    Login VARCHAR(15) NOT NULL,
-	    ID VARCHAR(255) NOT NULL,
+	    Login VARCHAR(50) NOT NULL,
+	    ID VARCHAR(50) NOT NULL,
 	    Nota INTEGER,
 	    PRIMARY KEY (Login, ID),
 	    FOREIGN KEY (ID) REFERENCES Filmes(ID)
@@ -72,7 +72,7 @@
 	
 	CREATE TABLE Artista_Musical
 	(
-		ID VARCHAR(255) NOT NULL,
+		ID VARCHAR(50) NOT NULL,
 		Genero_Musical VARCHAR(50) NOT NULL,
 		Nome_Artistico VARCHAR(55) NOT NULL,
 		Pais VARCHAR(50) NOT NULL,
@@ -81,8 +81,8 @@
 	
 	CREATE TABLE Like_Artista
 	(
-	    Login VARCHAR(15) NOT NULL,
-	    ID VARCHAR(255) NOT NULL,
+	    Login VARCHAR(50) NOT NULL,
+	    ID VARCHAR(50) NOT NULL,
 	    Nota INTEGER NOT NULL,
 	    PRIMARY KEY (Login, ID),
 	    FOREIGN KEY (Login) REFERENCES Pessoa(Login)
@@ -92,7 +92,7 @@
 	
 	CREATE TABLE Cantor
 	(
-	    ID VARCHAR(255) NOT NULL,
+	    ID VARCHAR(50) NOT NULL,
 	    PRIMARY KEY (ID),
 	    FOREIGN KEY (ID) REFERENCES Artista_Musical (ID)
 	        ON DELETE NO ACTION
@@ -101,7 +101,7 @@
 	
 	CREATE TABLE Banda
 	(
-	    ID VARCHAR(255) NOT NULL,
+	    ID VARCHAR(50) NOT NULL,
 	    PRIMARY KEY (ID),
 	    FOREIGN KEY (ID) REFERENCES Artista_Musical (ID)
 	        ON DELETE NO ACTION
@@ -113,8 +113,8 @@
 	    Nome_Real VARCHAR(55) NOT NULL,
 	    Estilo_Musical VARCHAR(55) NOT NULL,
 	    Data_Nascimento DATE NOT NULL,
-	    IDCantor VARCHAR(255) NOT NULL,
-	    IDBanda VARCHAR(255) NOT NULL,
+	    IDCantor VARCHAR(50) NOT NULL,
+	    IDBanda VARCHAR(50) NOT NULL,
 	    FOREIGN KEY (IDCantor) REFERENCES Cantor(ID),
 	        ON DELETE NO ACTION
 	        ON UPDATE NO ACTION,
@@ -125,7 +125,7 @@
 	
 		CREATE TABLE Membros
 	(
-	    ID VARCHAR(255) NOT NULL,
+	    ID VARCHAR(50) NOT NULL,
 	    TELEFONE INTEGER,
 	    ENDERECO VARCHAR(50),
 	    PRIMARY KEY (ID)
@@ -133,7 +133,7 @@
 	
 	CREATE TABLE Atores
 	(
-	    ID VARCHAR(255) NOT NULL,
+	    ID VARCHAR(50) NOT NULL,
 	    TELEFONE INTEGER,
 	    ENDERECO VARCHAR(50),
 	    PRIMARY KEY (ID),
@@ -142,7 +142,7 @@
 	
 	CREATE TABLE Diretor
 	(
-	    ID VARCHAR(255) NOT NULL,
+	    ID VARCHAR(50) NOT NULL,
 	    TELEFONE INTEGER,
 	    ENDERECO VARCHAR(50),
 	    PRIMARY KEY (ID),
@@ -152,8 +152,8 @@
 
     CREATE TABLE Atua_Filmes
     (
-        ID_Ator VARCHAR(255) NOT NULL,
-        ID_Filmes VARCHAR(255) NOT NULL,
+        ID_Ator VARCHAR(50) NOT NULL,
+        ID_Filmes VARCHAR(50) NOT NULL,
         PRIMARY KEY (ID_Ator, ID_Filmes),
         FOREIGN KEY (ID_Ator) REFERENCES Atores(ID),
         FOREIGN KEY (ID_Filmes) REFERENCES Filmes(ID)
@@ -161,8 +161,8 @@
     
     CREATE TABLE Dirige_Filmes
     (
-        ID_Diretor VARCHAR(255) NOT NULL,
-        ID_Filmes VARCHAR(255) NOT NULL,
+        ID_Diretor VARCHAR(50) NOT NULL,
+        ID_Filmes VARCHAR(50) NOT NULL,
         PRIMARY KEY (ID_Diretor, ID_Filmes),
         FOREIGN KEY (ID_Diretor) REFERENCES Diretor(ID),
         FOREIGN KEY (ID_Filmes) REFERENCES Filmes(ID)
