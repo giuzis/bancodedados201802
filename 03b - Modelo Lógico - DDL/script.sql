@@ -46,7 +46,7 @@
 	
 	CREATE TABLE Filmes
 	(
-	    ID INTEGER NOT NULL,
+	    ID VARCHAR(255) NOT NULL,
 	    Nome VARCHAR(55) NOT NULL,
 	    Data_de_Lançamento DATE,
 	    Categoria VARCHAR(55),
@@ -59,7 +59,7 @@
 	CREATE TABLE Like_Filmes
 	(
 	    Login VARCHAR(15) NOT NULL,
-	    ID INTEGER NOT NULL,
+	    ID VARCHAR(255) NOT NULL,
 	    Nota INTEGER,
 	    PRIMARY KEY (Login, ID),
 	    FOREIGN KEY (ID) REFERENCES Filmes(ID)
@@ -72,7 +72,7 @@
 	
 	CREATE TABLE Artista_Musical
 	(
-		ID INTEGER NOT NULL,
+		ID VARCHAR(255) NOT NULL,
 		Genero_Musical VARCHAR(50) NOT NULL,
 		Nome_Artistico VARCHAR(55) NOT NULL,
 		Pais VARCHAR(50) NOT NULL,
@@ -82,7 +82,7 @@
 	CREATE TABLE Like_Artista
 	(
 	    Login VARCHAR(15) NOT NULL,
-	    ID INTEGER NOT NULL,
+	    ID VARCHAR(255) NOT NULL,
 	    Nota INTEGER NOT NULL,
 	    PRIMARY KEY (Login, ID)
 	    FOREIGN KEY (Login) REFERENCES Pessoa(Login)
@@ -92,7 +92,7 @@
 	
 	CREATE TABLE Cantor
 	(
-	    ID INTEGER NOT NULL,
+	    ID VARCHAR(255) NOT NULL,
 	    PRIMARY KEY (ID),
 	    FOREIGN KEY (ID) REFERENCES Artista_Musical (ID)
 	        ON DELETE NO ACTION
@@ -101,7 +101,7 @@
 	
 	CREATE TABLE Banda
 	(
-	    ID INTEGER NOT NULL,
+	    ID VARCHAR(255) NOT NULL,
 	    PRIMARY KEY (ID),
 	    FOREIGN KEY (ID) REFERENCES Artista_Musical (ID)
 	        ON DELETE NO ACTION
@@ -113,8 +113,8 @@
 	    Nome_Real VARCHAR(55) NOT NULL,
 	    Estilo_Musical VARCHAR(55) NOT NULL,
 	    Data_Nascimento DATE NOT NULL,
-	    IDCantor INTEGER NOT NULL,
-	    IDBanda INTEGER NOT NULL,
+	    IDCantor VARCHAR(255) NOT NULL,
+	    IDBanda VARCHAR(255) NOT NULL,
 	    FOREIGN KEY (IDCantor) REFERENCES Cantor(ID) NULL
 	        ON DELETE NO ACTION
 	        ON UPDATE NO ACTION,
@@ -125,7 +125,7 @@
 	
 		CREATE TABLE Membros
 	(
-	    ID INTEGER NOT NULL,
+	    ID VARCHAR(255) NOT NULL,
 	    TELEFONE INTEGER,
 	    ENDERECO VARCHAR(50),
 	    PRIMARY KEY (ID)
@@ -133,7 +133,7 @@
 	
 	CREATE TABLE Atores
 	(
-	    ID INTEGER NOT NULL,
+	    ID VARCHAR(255) NOT NULL,
 	    TELEFONE INTEGER,
 	    ENDERECO VARCHAR(50),
 	    PRIMARY KEY (ID),
@@ -142,7 +142,7 @@
 	
 	CREATE TABLE Diretor
 	(
-	    ID INTEGER NOT NULL,
+	    ID VARCHAR(255) NOT NULL,
 	    TELEFONE INTEGER,
 	    ENDERECO VARCHAR(50),
 	    PRIMARY KEY (ID),
@@ -152,8 +152,8 @@
 
     CREATE TABLE Atua_Filmes
     (
-        ID_Ator INTEGER NOT NULL,
-        ID_Filmes INTEGER NOT NULL,
+        ID_Ator VARCHAR(255) NOT NULL,
+        ID_Filmes VARCHAR(255) NOT NULL,
         PRIMARY KEY (ID_Ator, ID_Filmes),
         FOREIGN KEY (ID_Ator) REFERENCES Atores(ID),
         FOREIGN KEY (ID_Filmes) REFERENCES Filmes(ID)
@@ -161,8 +161,8 @@
     
     CREATE TABLE Dirige_Filmes
     (
-        ID_Diretor INTEGER NOT NULL,
-        ID_Filmes INTEGER NOT NULL,
+        ID_Diretor VARCHAR(255) NOT NULL,
+        ID_Filmes VARCHAR(255) NOT NULL,
         PRIMARY KEY (ID_Diretor, ID_Filmes),
         FOREIGN KEY (ID_Diretor) REFERENCES Diretor(ID),
         FOREIGN KEY (ID_Filmes) REFERENCES Filmes(ID)
