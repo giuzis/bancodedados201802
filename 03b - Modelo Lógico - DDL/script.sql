@@ -84,7 +84,7 @@
 	    Login VARCHAR(15) NOT NULL,
 	    ID VARCHAR(255) NOT NULL,
 	    Nota INTEGER NOT NULL,
-	    PRIMARY KEY (Login, ID)
+	    PRIMARY KEY (Login, ID),
 	    FOREIGN KEY (Login) REFERENCES Pessoa(Login)
 	        ON DELETE NO ACTION
 	        ON UPDATE NO ACTION
@@ -115,10 +115,10 @@
 	    Data_Nascimento DATE NOT NULL,
 	    IDCantor VARCHAR(255) NOT NULL,
 	    IDBanda VARCHAR(255) NOT NULL,
-	    FOREIGN KEY (IDCantor) REFERENCES Cantor(ID) NULL
+	    FOREIGN KEY (IDCantor) REFERENCES Cantor(ID),
 	        ON DELETE NO ACTION
 	        ON UPDATE NO ACTION,
-	    FOREIGN KEY (IDBanda) REFERENCES Banda(ID) NULL
+	    FOREIGN KEY (IDBanda) REFERENCES Banda(ID)
 	        ON DELETE NO ACTION
 	        ON UPDATE NO ACTION
 	);
