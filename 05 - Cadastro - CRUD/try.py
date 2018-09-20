@@ -51,7 +51,42 @@ def update():
 
 	return update_pessoa;
 
+def delete(LoginPessoa):
+	try:
+ 		conn = psycopg2.connect("dbname='1802BandoDeDados' user='1802BandoDeDados' host='200.134.10.32' password='803322'")
+	except:
+ 		print "I am unable to connect to the database."
 
+	cur = conn.cursor()
+
+	try:
+ 		cur.execute("DELETE FROM pessoa WHERE pessoa.login LIKE '" + LoginPessoa + "';")
+	except Exception as e:
+ 		print "Nao foi possivel apagar"
+		print e
+ 	conn.commit()
+ 	cur.close()
+ 	conn.close()
+
+def listagem():
+	try:
+	 	conn = psycopg2.connect("dbname='1802BandoDeDados' user='1802BandoDeDados' host='200.134.10.32' password='803322'")
+	except:
+	 	print "I am unable to connect to the database."
+
+	conn.set_client_encoding('LATIN9')
+	cur = conn.cursor()
+
+	try:
+		cur.execute("SELECT * FROM pessoa;")
+		for pessoas in cur:
+			print(unicode(unicode(pessoas[0]) + ", " + unicode(pessoas[1]) + ", " + unicode(pessoas[2]) + ", " + unicode(pessoas[3])))
+	except Exception as e:
+	 	print "Nao foi possivel inserir"
+	 	print e
+	conn.commit()
+	cur.close()
+	conn.close()
 
 
 #Flags para o chaveamento dos menus. Acredito que talvez com um break; continue; daria certo também.
