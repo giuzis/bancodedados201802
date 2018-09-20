@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 import psycopg2;
 import psycopg2.extras;
+import psycopg2.extensions
+psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
+psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 #Métodos e Funções.
 
 
@@ -51,13 +54,15 @@ def update():
 
 	return update_pessoa;
 
-def delete(LoginPessoa):
+def delete():
 	try:
  		conn = psycopg2.connect("dbname='1802BandoDeDados' user='1802BandoDeDados' host='200.134.10.32' password='803322'")
 	except:
  		print "I am unable to connect to the database."
 
 	cur = conn.cursor()
+
+	LoginPessoa = raw_input("Digite o login da pessoa que deseja apagar: ")
 
 	try:
  		cur.execute("DELETE FROM pessoa WHERE pessoa.login LIKE '" + LoginPessoa + "';")

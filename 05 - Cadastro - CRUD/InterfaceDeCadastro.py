@@ -5,7 +5,7 @@ psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 
 
-def delete(NomePessoa):
+def delete():
 	try:
  		conn = psycopg2.connect("dbname='1802BandoDeDados' user='1802BandoDeDados' host='200.134.10.32' password='803322'")
 	except:
@@ -13,8 +13,10 @@ def delete(NomePessoa):
 
 	cur = conn.cursor()
 
+	LoginPessoa = raw_input("Digite o login da pessoa que deseja apagar: ")
+
 	try:
- 		cur.execute("DELETE FROM pessoa WHERE pessoa.nome LIKE '" + NomePessoa + "';")
+ 		cur.execute("DELETE FROM pessoa WHERE pessoa.login LIKE '" + LoginPessoa + "';")
 	except Exception as e:
  		print "Nao foi possivel apagar"
 		print e
@@ -43,6 +45,8 @@ def listagem():
 	conn.close()
 
 print("//////////////MENU///////////////") 
-menu = raw_input("Aperte 1 para listar as pessoas\n")
+menu = raw_input("Aperte 1 para listar as pessoas, Aperte 2 para deletar as pessoas\n")
 if menu == "1":
 	listagem();
+elif menu == "2":
+	delete()
