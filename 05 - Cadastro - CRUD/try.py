@@ -69,11 +69,6 @@ def delete(LoginPessoa):
  	conn.close()
 
 def listagem():
-	try:
-	 	conn = psycopg2.connect("dbname='1802BandoDeDados' user='1802BandoDeDados' host='200.134.10.32' password='803322'")
-	except:
-	 	print "I am unable to connect to the database."
-
 	conn.set_client_encoding('LATIN9')
 	cur = conn.cursor()
 
@@ -112,9 +107,17 @@ while menu1_on and not end:
 				menu2_on = False; #Sai do menu 2.
 			elif option2=="2":
 				print("\n Carregando... \n")
-			elif option2=="3":
+			elif option2=="3": #Opção de Editar (Update)
 				print("\n Carregando... \n")
-				update()
+				cur = conn.cursor()
+				cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+				try:
+					cur.execute(update())
+				except:
+					print("Falha ao dar update.")
+				conn.commit()
+				cur.close()
+				conn.close()
 			else:
 				print("\n Digite uma opção válida! \n")
 		menu2_on = True; #Reconfigura menu 2.
