@@ -66,9 +66,9 @@ def listagem():
 def inserir():
 	inserir_pessoas = "INSERT INTO Pessoa VALUES ('pessoa.id','pessoa.nome','pessoa.cidade_natal','pessoa.anonascimento'); "
 	new_id = raw_input("Digite o login: ")
-	new_name = raw_input("Digite o nome:  ")
-	new_city = raw_input("Digite a cidade natal: ")
-	new_nasc = raw_input("Digite o ano de nascimento no padrão dia/mês/ano: ")
+	new_name = raw_input("Digite o nome:  ").decode('utf-8')
+	new_city = raw_input("Digite a cidade natal: ").decode('utf-8')
+	new_nasc = raw_input("Digite o ano de nascimento no padrão dia-mês-ano: ")
 	inserir_pessoas = inserir_pessoas.replace("pessoa.id",new_id)
 	inserir_pessoas = inserir_pessoas.replace("pessoa.nome",new_name)
 	inserir_pessoas = inserir_pessoas.replace("pessoa.cidade_natal",new_city)
@@ -76,7 +76,14 @@ def inserir():
 
 	return inserir_pessoas;
 
+def inserir_conhecidos():
+	inserir_conhecidos = "INSERT INTO Conhece VALUES ('pessoa1', 'pessoa2');"
+	nome_pessoa1 = raw_input("Digite seu login: ").decode('utf-8')
+	nome_pessoa2 = raw_input("Digite o login da pessoa que você conhece: ").decode('utf-8')
+	inserir_conhecidos = inserir_conhecidos.replace("pessoa1",nome_pessoa1)
+	inserir_conhecidos = inserir_conhecidos.replace("pessoa2",nome_pessoa2)
 
+	return inserir_conhecidos
 #Flags para o chaveamento dos menus. Acredito que talvez com um break; continue; daria certo também.
 menu1_on = True;
 menu2_on = True;
@@ -84,27 +91,28 @@ end = False;
 
 #Teste de conexão
 try:
-	conn = psycopg2.connect("dbname='1802BandoDeDados' user='1802BandoDeDados' host='200.134.10.32' password='803322'")
+	conn = psycopg2.connect("dbname='1802BandoDeDados' user='1802BandoDeDados' host='200.134.10.32' password='803322'") #Envia as informações para se conectar ao banco.
 except:
-	print "Falha ao se conectar ao banco de dados. Terminando o programa..."
-	end = True;
+	print "Falha ao se conectar ao banco de dados. Terminando o programa..." #Se der errado a conexão, termina a execução do programa.
+	end = True; #Impede o While do Menu de funcionar e o programa fecha.
 
-while menu1_on and not end:
-	option = raw_input("O que deseja fazer? \n 1 - Listar todas as pessoas \n 2 - Cadastrar uma nova pessoa \n 3 - Sair do programa.  \n Digite o valor da opção que deseja. \n")
-	if option=="1":
+while menu1_on and not end: #Menu 01 -  Opções principais.
+	option = raw_input("O que deseja fazer? \n 1 - Listar todas as pessoas \n 2 - Cadastrar uma nova pessoa \n 3 - Cadastrar um conhecido \n 4 - Sair do programa.  \n Digite o valor da opção que deseja:  ")
+	if option=="1": #Se selecionar a primeira opção, Lista todas as pessoas.
 		print(" \n Listando...  \n")
-		conn.set_client_encoding('LATIN9')
-		cur = conn.cursor()
+		conn.set_client_encoding('LATIN9') #Não sei o que faz, mas coloquei.
+		cur = conn.cursor() #Se conecta ao banco.
 		try:
-			cur.execute(listagem())
-			for pessoas in cur:
-				print(unicode(unicode(pessoas[0]) + ", " + unicode(pessoas[1]) + ", " + unicode(pessoas[2]) + ", " + unicode(pessoas[3])))
-		except:
+			cur.execute(listagem()) #Testa a execução do SQL da função Listagem.
+			for pessoas in cur: # Imprime a lista de pessoas.
+				print(" LOGIN --------------- NOME --------------------- CIDADE NATAL---------------- DATA DE NASCIMENTO.")
+				print(unicode(unicode(pessoas[0]) + ---------------", " + unicode(pessoas[1]) + ---------------------", " + unicode(pessoas[2]) + ----------------", " + unicode(pessoas[3])))
+		except: #Se der falha na execução do SQL
 			print("Falha ao Listar.")
-		conn.commit()
-		cur.close()
+		conn.commit() #Não sei o que faz mas precisa.
+		cur.close() #Fecha o cur.
 		while  menu2_on:
-			option2 = raw_input("O que deseja fazer agora? \n 1 - Voltar \n 2 - Apagar uma pessoa \n 3 - Editar uma pessoa. \n")
+			option2 = raw_input("O que deseja fazer agora?  \n 1 - Apagar uma pessoa \n 2 - Editar uma pessoa. \n 3 - Voltar. \n Digite o valor da opção que deseja:  " )
 			if option2=="1":
 				print("\n Voltando... \n")
 				menu2_on = False; #Sai do menu 2.
@@ -141,7 +149,17 @@ while menu1_on and not end:
 			print("Falha ao  inserir.")
 		conn.commit()
 		cur.close()
-	elif option=="3":
+	elif option =="3":
+		print("\n Carregando ... \n")
+		cur = conn.cursor()
+		cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+		try:
+			cur.execute(inserir_conhecidos())
+		except:
+			print("Falha ao inserir conhecidos.")
+		conn.commit()
+		cur.close()
+	elif option=="4":
 		print(" \n Saindo... \n")
 		menu1_on = False
 	else:
