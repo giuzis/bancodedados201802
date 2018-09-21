@@ -5,8 +5,16 @@ import psycopg2;
 #Flags para o chaveamento dos menus. Acredito que talvez com um break; continue; daria certo também.
 menu1_on = True;
 menu2_on = True;
+end = False;
 
-while menu1_on:
+#Teste de conexão
+try:
+	conn = psycopg2.connect("dbname='1802BandoDeDados' user='1802BandoDeDados' host='200.134.10.32' password='803322'")
+except:
+	print "Falha ao se conectar ao banco de dados. Terminando o programa..."
+	end = True;
+
+while menu1_on and not end:
 	option = raw_input("O que deseja fazer? \n 1 - Listar todas as pessoas \n 2 - Cadastrar uma nova pessoa \n 3 - Sair do programa.  \n Digite o valor da opção que deseja. \n")
 	if option=="1":
 		print(" \n Listando...  \n")
