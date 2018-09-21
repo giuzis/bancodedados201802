@@ -105,18 +105,17 @@ while menu1_on and not end: #Menu 01 -  Opções principais.
 		try:
 			cur.execute(listagem()) #Testa a execução do SQL da função Listagem.
 			for pessoas in cur: # Imprime a lista de pessoas.
-				print(" LOGIN --------------- NOME --------------------- CIDADE NATAL---------------- DATA DE NASCIMENTO.")
-				print(unicode(unicode(pessoas[0]) + ---------------", " + unicode(pessoas[1]) + ---------------------", " + unicode(pessoas[2]) + ----------------", " + unicode(pessoas[3])))
+				print(unicode(unicode(pessoas[0]) + ",    "  + unicode(pessoas[1]) + ",   "   + unicode(pessoas[2]) + ",    "  + unicode(pessoas[3]) ))
 		except: #Se der falha na execução do SQL
 			print("Falha ao Listar.")
 		conn.commit() #Não sei o que faz mas precisa.
 		cur.close() #Fecha o cur.
 		while  menu2_on:
 			option2 = raw_input("O que deseja fazer agora?  \n 1 - Apagar uma pessoa \n 2 - Editar uma pessoa. \n 3 - Voltar. \n Digite o valor da opção que deseja:  " )
-			if option2=="1":
+			if option2=="3":
 				print("\n Voltando... \n")
 				menu2_on = False; #Sai do menu 2.
-			elif option2=="2":
+			elif option2=="1":
 				print("\n Carregando... \n")
 				cur = conn.cursor()
 				cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -126,7 +125,7 @@ while menu1_on and not end: #Menu 01 -  Opções principais.
 					print("Falha ao deletar")
 				conn.commit()
  				cur.close()
-			elif option2=="3": #Opção de Editar (Update)
+			elif option2=="2": #Opção de Editar (Update)
 				print("\n Carregando... \n")
 				cur = conn.cursor()
 				cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
