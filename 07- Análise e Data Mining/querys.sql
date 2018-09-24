@@ -1,0 +1,1 @@
+--Olá pessoal! Adicionem aqui as querys SQL que serão usadas na resposta do trabalho 07 de BD!
