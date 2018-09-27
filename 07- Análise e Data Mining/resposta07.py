@@ -42,7 +42,7 @@ while menu and not end:
 	#Opções do Menu. Foram separadas em diferentes prints para melhor visualização.
 	print("\n Bem vindo! O que deseja fazer? \n")
 	print("\n 1 - Fechar o programa. \n")
-	print("\n 2 - Calcular Média e Desvio Padrão dos ratings. (De Artistas Musicais e ou Filmes. \n")
+	print("\n 2 - Calcular Média e Desvio Padrão dos ratings. (De Artistas Musicais e ou Filmes). \n")
 	print("\n 3 - Obter Artistas  Musicais e Filmes com o maior rating médio. \n")
 	print("\n 4 - TOP 10 Artistas Musicais e Filmes mais populares \n")
 	print("\n 5 - Descubra quem é seu amigo de verdade! \n")
@@ -58,12 +58,12 @@ while menu and not end:
 		menu = False
 	elif option=="2":
 		#print("Qual é a média e desvio padrão dos ratings para artistas musicais e filmes?")
-		menu_in = True;		
+		menu_in = True;
 		while menu_in:
 			print("\n O que deseja fazer agora? \n")
 			print("\n 1 - Voltar. \n")
 			print("\n 2 - Obter Média e Desvio Padrão dos Artistas Musicais. \n")
-			print("\n 3 - Obter Média e Desvio Padrão dos Filmes. \n")	
+			print("\n 3 - Obter Média e Desvio Padrão dos Filmes. \n")
 			option: raw_input("\n O que deseja fazer? \n")
 			if option=="1":
 				menu_in = False;
@@ -79,7 +79,7 @@ while menu and not end:
 			else:
 				print("Digite uma opção válida!")
 	elif option=="3":
-		#print("Quais são os artistas e filmes com o maior rating médio curtidos por pelo menos duas pessoas? Ordenados por rating médio.")	
+		#print("Quais são os artistas e filmes com o maior rating médio curtidos por pelo menos duas pessoas? Ordenados por rating médio.")
 	elif option=="4":
 		#print("Quais são os 10 artistas musicais e filmes mais populares? Ordenados por popularidade.")
 	elif option=="5":
@@ -91,12 +91,12 @@ while menu and not end:
 	elif option=="8":
     		#print("Construa um gráfico para a função f(x) = (número de pessoas que curtiram exatamente x filmes).")
 
-	elif option=="9": 
+	elif option=="9":
     		#print("Construa um gráfico para a função f(x) = (número de filmes curtidos por exatamente x pessoas).")
 	elif option=="10":
 		#print("Defina duas outras informações (como as anteriores) que seriam úteis para compreender melhor a rede. Agregue estas informações à sua aplicação.")
 	elif option=="11":
-	else:	
+	else:
 		print("Digite uma opção válida!")
 
-	
+
