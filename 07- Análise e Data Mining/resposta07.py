@@ -15,7 +15,17 @@ def calcula_media(coluna,tabela):
 	sql_media = sql_media.replace ("coluna_tb",coluna)
 	sql_media = sql_media.replace ("tabela_tb",tabela)
 
-	return sql_media;
+	#Executa a query
+	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+	try:
+		cur.execute(sql_media)
+		print("Media")
+		for media in cur:
+			print(unicode(media[0]))
+	except:
+		print("Falha na pesquisa")
+	conn.commit()
+	cur.close()
 
 def calcula_desvio(coluna,tabela):
 	#e_coluna => coluna externo;
@@ -24,19 +34,20 @@ def calcula_desvio(coluna,tabela):
 	sql_desvio = sql_desvio.replace ("coluna_tb",coluna)
 	sql_desvio = sql_desvio.replace ("tabela_tb",tabela)
 
-	return sql_desvio;
-
-def executa_query(query,coluna):
+	#Executa a query
 	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 	try:
-		cur.execute(query)
-		print(coluna)
-		for coluna in cur:
-			print(unicode(coluna[0]))
+		cur.execute(sql_desvio)
+		print("Desvio")
+		for desvio in cur:
+			print(unicode(desvio[0]))
 	except:
 		print("Falha na pesquisa")
 	conn.commit()
 	cur.close()
+
+
+
 
 
 #Variáveis de controle de menu.
@@ -72,19 +83,19 @@ while menu and not end:
 		#print("Qual é a média e desvio padrão dos ratings para artistas musicais e filmes?")
 		menu_in = True;
 		while menu_in:
-			print("\n O que deseja fazer agora? \n")
-			print("\n 1 - Voltar. \n")
-			print("\n 2 - Obter Média e Desvio Padrão dos Artistas Musicais. \n")
-			print("\n 3 - Obter Média e Desvio Padrão dos Filmes. \n")
-			option = raw_input("\n O que deseja fazer? \n")
+			print("O que deseja fazer agora?")
+			print("1 - Voltar. \n")
+			print("2 - Obter Média e Desvio Padrão dos Artistas Musicais.")
+			print("3 - Obter Média e Desvio Padrão dos Filmes.")
+			option = raw_input("O que deseja fazer?")
 			if option=="1":
 				menu_in = False;
 			elif option=="2":
-				executa_query(calcula_media("like_artista.nota","like_artista"),"media")
-				executa_query(calcula_desvio("like_artista.nota","like_artista"),"desvio")
+				calcula_media("like_artista.nota","like_artista")
+				calcula_desvio("like_artista.nota","like_artista")
 			elif option=="3":
-				executa_query(calcula_media("like_filmes.nota","like_filmes"),"media")
-				executa_query(calcula_desvio("like_filmes.nota","like_filmes"),"desvio")
+				calcula_media("like_filmes.nota","like_filmes")
+				calcula_desvio("like_filmes.nota","like_filmes")
 			else:
 				print("Digite uma opção válida!")
 	elif option=="3":
