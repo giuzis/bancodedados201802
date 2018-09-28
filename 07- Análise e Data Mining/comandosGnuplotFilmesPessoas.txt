@@ -1,0 +1,5 @@
+plot 'dadosGnuoplotFilmesPessoas.csv' using 1:2 with lines title 'Numero de Pessoas que Curtiram x Numero de Filmes'
+set term png
+set output 'graficoFilmesPessoas.png'
+replot
+set term x11

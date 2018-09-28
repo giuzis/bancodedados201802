@@ -3,6 +3,9 @@
 import psycopg2;
 import psycopg2.extras;
 import psycopg2.extensions
+import os
+import subprocess
+import csv
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 
@@ -47,7 +50,57 @@ def calcula_desvio(coluna,tabela):
 	cur.close()
 
 
+def graficoFilmesPessoas():
+	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+	eixoX = []
+	eixoY = []
+	try:
+		#cur.execute("CREATE VIEW num AS SELECT COUNT(like_filmes.login) FROM like_filmes GROUP BY like_filmes.login;")
+		#conn.commit()
+		cur.execute("SELECT count, count(*) AS quantpessoas FROM num GROUP BY count;")
+		for nota in cur:
+			eixoX.append(str(nota[0]))
+			eixoY.append(str(nota[1]))
+	except Exception as e:
+		print("Falha na pesquisa")
+		print e
+	conn.commit()
+	cur.close()
+	zip(eixoX, eixoY)
+	with open("dadosGnuoplotFilmesPessoas.csv", "w") as f:
+		writer = csv.writer(f, delimiter='\t')
+		writer.writerows(zip(eixoX, eixoY))
+	comandosGnuplot = open("comandosGnuplotFilmesPessoas.txt", "wt")
+	comandosGnuplot.write("plot 'dadosGnuoplotFilmesPessoas.csv' using 1:2 with lines title 'Numero de Pessoas que Curtiram x Numero de Filmes'\n")
+	comandosGnuplot.write("set term png\nset output 'graficoFilmesPessoas.png'\nreplot\nset term x11\n")
+	p = subprocess.Popen("gnuplot -p comandosGnuplotFilmesPessoas.txt", shell = True)
+	os.waitpid(p.pid, 11)
 
+def graficoPessoasFilmes():
+	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+	eixoX = []
+	eixoY = []
+	try:
+		#cur.execute("CREATE VIEW num2 AS SELECT COUNT(like_filmes.id) FROM like_filmes GROUP BY like_filmes.id;")
+		#conn.commit()
+		cur.execute("SELECT count, count(*) AS numpessoas FROM num2 GROUP BY count ORDER BY count;")
+		for nota in cur:
+			eixoX.append(str(nota[0]))
+			eixoY.append(str(nota[1]))
+	except Exception as e:
+		print("Falha na pesquisa")
+		print e
+	conn.commit()
+	cur.close()
+	zip(eixoX, eixoY)
+	with open("dadosGnuoplotPessoasFilmes.csv", "w") as f:
+		writer = csv.writer(f, delimiter='\t')
+		writer.writerows(zip(eixoX, eixoY))
+	comandosGnuplot = open("comandosGnuplotPessoasFilmes.txt", "wt")
+	comandosGnuplot.write("plot 'dadosGnuoplotPessoasFilmes.csv' using 1:2 with lines title 'Numero de Filmes que Foram Curtidos x Numero de Pessoas'\n")
+	comandosGnuplot.write("set term png\nset output 'graficoPessoasFilmes.png'\nreplot\nset term x11\n")
+	p = subprocess.Popen("gnuplot -p comandosGnuplotPessoasFilmes.txt", shell = True)
+	os.waitpid(p.pid, 11)
 
 
 #Variáveis de controle de menu.
@@ -110,9 +163,10 @@ while menu and not end:
     		print("Qual o número de conhecidos dos conhecidos (usando ConheceNormalizada) para cada integrante do seu grupo?")
 	elif option=="8":
     		print("Construa um gráfico para a função f(x) = (número de pessoas que curtiram exatamente x filmes).")
-
+    		graficoFilmesPessoas()
 	elif option=="9":
     		print("Construa um gráfico para a função f(x) = (número de filmes curtidos por exatamente x pessoas).")
+    		graficoPessoasFilmes()
 	elif option=="10":
 		print("Defina duas outras informações (como as anteriores) que seriam úteis para compreender melhor a rede. Agregue estas informações à sua aplicação.")
 	elif option=="11":

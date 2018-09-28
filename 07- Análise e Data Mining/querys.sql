@@ -14,7 +14,9 @@ SELECT * FROM like_artista
 --Qual o número de conhecidos dos conhecidos (usando ConheceNormalizada) para cada integrante do seu grupo?
 
 --Construa um gráfico para a função f(x) = (número de pessoas que curtiram exatamente x filmes).
---SELECT like_filmes.login, COUNT(like_filmes.login) FROM like_filmes GROUP BY like_filmes.login ORDER BY COUNT(like_filmes.login)
+CREATE VIEW num AS SELECT COUNT(like_filmes.login) FROM like_filmes GROUP BY like_filmes.login;
+SELECT count, count(*) AS quantpessoas FROM num GROUP BY count;
 --Construa um gráfico para a função f(x) = (número de filmes curtidos por exatamente x pessoas).
-
+CREATE VIEW num2 AS SELECT COUNT(like_filmes.id) FROM like_filmes GROUP BY like_filmes.id;
+SELECT count, count(*) AS numpessoas FROM num2 GROUP BY count ORDER BY count;
 --Defina duas outras informações (como as anteriores) que seriam úteis para compreender melhor a rede. Agregue estas informações à sua aplicação.
