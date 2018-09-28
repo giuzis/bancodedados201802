@@ -1,6 +1,8 @@
---Olá pessoal! Adicionem aqui as querys SQL que serão usadas na resposta do trabalho 07 de BD!
+Olá pessoal! Adicionem aqui as querys SQL que serão usadas na resposta do trabalho 07 de BD!
 --Qual é a média e desvio padrão dos ratings para artistas musicais e filmes?
 SELECT AVG(like_filmes.nota) AS Media, STDDEV(like_filmes.nota) AS DesvioPadrao FROM like_filmes;
+SELECT AVG(like_artista.nota) AS Media, STDDEV(like_artista.nota) AS DesvioPadrao FROM like_artista;
+SELECT * FROM like_artista
 --Quais são os artistas e filmes com o maior rating médio curtidos por pelo menos duas pessoas? Ordenados por rating médio.
 
 --Quais são os 10 artistas musicais e filmes mais populares? Ordenados por popularidade.
