@@ -47,7 +47,50 @@ def calcula_desvio(coluna,tabela):
 	except:
 		print("Falha na pesquisa")
 	conn.commit()
+
+def conheceNormalizada(): #4
+	cur = conn.cursor()
+	try:
+		cur.execute("DROP VIEW ConheceNormalizada CASCADE;")
+		conn.commit()
+	except:
+		pass
+
+	conn.rollback()
+	cur.execute("create or replace view ConheceNormalizada as select p1.login as login1, p2.login as login2 from pessoa p1, pessoa p2, conhece where (p1.login=conhece.login1 and p2.login=conhece.login2) or (p1.login=conhece.login2 and p2.login=conhece.login1)	group by p1.login, p2.login;")
+	conn.commit()
 	cur.close()
+	print
+	print "VIEW criada com o nome de ConheceNormalizada"
+
+def compartilharMaxFilmes(conn): #5
+	cur = conn.cursor()
+	try:
+		cur.execute("DROP VIEW compartilhaMax;")
+	except:
+		pass
+	conn.rollback()
+	cur.execute("create or replace view compartilhaMax as (select con.login1 as l1, con.login2 as l2, 
+	c1.num+c2.num as soma
+from ConheceNormalizada con, 
+(select login, count(login) as num from like_filmes GROUP BY login) as c1, 
+(select login, count(login) as num from like_filmes GROUP BY login) as c2 where con.login1 = c1.login and con.login2=c2.login);
+
+
+SELECT l1, l2 from compartilhaMax where soma in (select max(soma) from compartilhaMax);")
+	conn.commit()
+	conn.rollback()
+	cur.execute("SELECT conhececonhecido, contagem FROM compartilhaMax;")
+	resp = cur.fetchone()
+	print
+	print"Pessoas que compartilham maior quantidade de filmes:"
+	print str(resp[0])
+	print"Com a quantidade de:"
+	print str(resp[1])
+
+	cur.close()
+
+
 
 
 def graficoFilmesPessoas():
