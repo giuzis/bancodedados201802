@@ -49,7 +49,7 @@ def calcula_desvio(coluna,tabela):
 	conn.commit()
 
 def conheceNormalizada(): #4
-	cur = conn.cursor()
+	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 	try:
 		cur.execute("DROP VIEW ConheceNormalizada CASCADE;")
 		conn.commit()
@@ -63,33 +63,36 @@ def conheceNormalizada(): #4
 	print
 	print "VIEW criada com o nome de ConheceNormalizada"
 
-def compartilharMaxFilmes(conn): #5
-	cur = conn.cursor()
+def compartilhaMaxFilmes(): #5
+	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 	try:
 		cur.execute("DROP VIEW compartilhaMax;")
 	except:
 		pass
 	conn.rollback()
-	cur.execute("create or replace view compartilhaMax as (select con.login1 as l1, con.login2 as l2, 
-	c1.num+c2.num as soma
-from ConheceNormalizada con, 
-(select login, count(login) as num from like_filmes GROUP BY login) as c1, 
-(select login, count(login) as num from like_filmes GROUP BY login) as c2 where con.login1 = c1.login and con.login2=c2.login);
-
-
-SELECT l1, l2 from compartilhaMax where soma in (select max(soma) from compartilhaMax);")
+	cur.execute("create or replace view compartilhaMax as (select con.login1 as l1, con.login2 as l2, c1.num+c2.num as soma from ConheceNormalizada con, (select login, count(login) as num from like_filmes GROUP BY login) as c1, (select login, count(login) as num from like_filmes GROUP BY login) as c2 where con.login1 = c1.login and con.login2=c2.login); ")
 	conn.commit()
 	conn.rollback()
-	cur.execute("SELECT conhececonhecido, contagem FROM compartilhaMax;")
+	cur.execute("SELECT l1, l2 from compartilhaMax where soma in (select max(soma) from compartilhaMax);")
 	resp = cur.fetchone()
 	print
 	print"Pessoas que compartilham maior quantidade de filmes:"
 	print str(resp[0])
-	print"Com a quantidade de:"
 	print str(resp[1])
 
 	cur.close()
 
+def conhecidosConhecidos(): #6
+	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+	conn.rollback()
+	cur.execute("select con1, count(con1) as num_con from (select DISTINCT c2.login1 as con1, c2.login2 as con2 from ConheceNormalizada c1, ConheceNormalizada c2 where c1.login1 in ('DI1802giulianasilva', 'DI1802alexandrematias', 'DI1802matheusoliveira') and c1.login2 = c2.login1) as conhecidos2 GROUP BY con1;")
+	resp = cur.fetchall()
+	print "soma dos conhecidos dos conhecidos:"
+	for i in resp:
+		print str(i[0])+" "+str(i[1]) 
+	
+	cur.close()
 
 
 
@@ -336,11 +339,11 @@ while menu and not end:
 			else:
 				print("Digite uma opção válida!")
 	elif option=="5":
-		print("Crie uma view chamada ConheceNormalizada que represente simetricamente os relacionamentos de conhecidos da turma. Por exemplo, se a conhece b mas b não declarou conhecer a, a view criada deve conter o relacionamento (b,a) além de (a,b).")
+		conheceNormalizada()
 	elif option=="6":
-		print(" Quais são os conhecidos (duas pessoas ligadas na view ConheceNormalizada) que compartilham o maior numero de filmes curtidos?")
+		compartilhaMaxFilmes()
 	elif option=="7":
-    		print("Qual o número de conhecidos dos conhecidos (usando ConheceNormalizada) para cada integrante do seu grupo?")
+    		conhecidosConhecidos()
 	elif option=="8":
     		print("Construa um gráfico para a função f(x) = (número de pessoas que curtiram exatamente x filmes).")
     		graficoFilmesPessoas()

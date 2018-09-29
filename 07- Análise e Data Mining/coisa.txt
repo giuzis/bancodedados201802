@@ -1,0 +1,89 @@
+Bem vindo! O que deseja fazer? 
+
+1 - Fechar o programa.
+2 - Calcular Média e Desvio Padrão dos ratings. (De Artistas Musicais e ou Filmes).
+3 - Obter Artistas  Musicais e Filmes com o maior rating médio. 
+4 - TOP 10 Artistas Musicais e Filmes mais populares 
+5 - Descubra quem é seu amigo de verdade! 
+6 - Descubra os filmes mais curtidos pelos seus amigos 
+7 - Descubre os conhecidos dos seus conhecidos. 
+8 - Gráfico: Filmes vs Curtidas 
+9 - Gráfico: Quantidade de filmes curtidos vs Pessoas 
+10 - TOP 10 Artistas Musicais menos populares
+11 - TOP 10 Filmes menos populares 
+Selecione a opção desejada: O que deseja fazer agora?
+1 - Voltar. 
+
+2 - Obter Média e Desvio Padrão dos Artistas Musicais.
+3 - Obter Média e Desvio Padrão dos Filmes.
+O que deseja fazer?Media
+4.3071672354948805
+Desvio
+0.95865728875285519009
+O que deseja fazer agora?
+1 - Voltar. 
+
+2 - Obter Média e Desvio Padrão dos Artistas Musicais.
+3 - Obter Média e Desvio Padrão dos Filmes.
+O que deseja fazer?Digite uma opção válida!
+O que deseja fazer agora?
+1 - Voltar. 
+
+2 - Obter Média e Desvio Padrão dos Artistas Musicais.
+3 - Obter Média e Desvio Padrão dos Filmes.
+O que deseja fazer?Digite uma opção válida!
+O que deseja fazer agora?
+1 - Voltar. 
+
+2 - Obter Média e Desvio Padrão dos Artistas Musicais.
+3 - Obter Média e Desvio Padrão dos Filmes.
+O que deseja fazer?Digite uma opção válida!
+O que deseja fazer agora?
+1 - Voltar. 
+
+2 - Obter Média e Desvio Padrão dos Artistas Musicais.
+3 - Obter Média e Desvio Padrão dos Filmes.
+O que deseja fazer?Digite uma opção válida!
+O que deseja fazer agora?
+1 - Voltar. 
+
+2 - Obter Média e Desvio Padrão dos Artistas Musicais.
+3 - Obter Média e Desvio Padrão dos Filmes.
+O que deseja fazer?Digite uma opção válida!
+O que deseja fazer agora?
+1 - Voltar. 
+
+2 - Obter Média e Desvio Padrão dos Artistas Musicais.
+3 - Obter Média e Desvio Padrão dos Filmes.
+O que deseja fazer?Digite uma opção válida!
+O que deseja fazer agora?
+1 - Voltar. 
+
+2 - Obter Média e Desvio Padrão dos Artistas Musicais.
+3 - Obter Média e Desvio Padrão dos Filmes.
+O que deseja fazer?Digite uma opção válida!
+O que deseja fazer agora?
+1 - Voltar. 
+
+2 - Obter Média e Desvio Padrão dos Artistas Musicais.
+3 - Obter Média e Desvio Padrão dos Filmes.
+O que deseja fazer?Digite uma opção válida!
+O que deseja fazer agora?
+1 - Voltar. 
+
+2 - Obter Média e Desvio Padrão dos Artistas Musicais.
+3 - Obter Média e Desvio Padrão dos Filmes.
+O que deseja fazer?Bem vindo! O que deseja fazer? 
+
+1 - Fechar o programa.
+2 - Calcular Média e Desvio Padrão dos ratings. (De Artistas Musicais e ou Filmes).
+3 - Obter Artistas  Musicais e Filmes com o maior rating médio. 
+4 - TOP 10 Artistas Musicais e Filmes mais populares 
+5 - Descubra quem é seu amigo de verdade! 
+6 - Descubra os filmes mais curtidos pelos seus amigos 
+7 - Descubre os conhecidos dos seus conhecidos. 
+8 - Gráfico: Filmes vs Curtidas 
+9 - Gráfico: Quantidade de filmes curtidos vs Pessoas 
+10 - TOP 10 Artistas Musicais menos populares
+11 - TOP 10 Filmes menos populares 
+Selecione a opção desejada: 
