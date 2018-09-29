@@ -102,7 +102,88 @@ def graficoPessoasFilmes():
 	p = subprocess.Popen("gnuplot -p comandosGnuplotPessoasFilmes.txt", shell = True)
 	os.waitpid(p.pid, 11)
 
+def makeViewArtistas():
+	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+	sql_view = "CREATE VIEW artistas_por_like AS SELECT  artista_musical.nome_artistico,  artista_musical.id, COUNT(artista_musical.nome_artistico) AS num_curtidas FROM artista_musical, like_artista WHERE artista_musical.id = like_artista.id GROUP BY artista_musical.nome_artistico, artista_musical.id ORDER BY artista_musical.nome_artistico;"
+	try:
+		cur.execute("DROP VIEW artistas_por_like") #Garante que a view desatualizada desapareça.
+		cur.execute(sql_view) #Executa a nova view.
+		for media in cur:
+			print( unicode( unicode(media[0]) + ",  " + unicode(media[1]) ) )
+	except Exception as e:
+		print("Falha na pesquisa")
+		print e
+	conn.commit()
+	cur.close()
 
+def makeViewFilmes():
+	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+	sql_view = "CREATE VIEW filmes_por_like AS SELECT  filmes.id, COUNT(filmes.id) AS num_curtidas FROM filmes, like_filmes WHERE filmes.id = like_filmes.id GROUP BY  filmes.id;"
+	try:
+		cur.execute("DROP VIEW filmes_por_like") #Garante que a view desatualizada desapareça.
+		cur.execute(sql_view) #Executa a nova view.
+	except Exception as e:
+		print("Falha na pesquisa")
+		print e
+	conn.commit()
+	cur.close()
+
+
+def ratingArtistas():
+	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+	sql_run = "SELECT ROUND(AVG(like_artista.nota),3) AS Media, artistas_por_like.nome_artistico FROM like_artista, artistas_por_like WHERE  like_artista.id = artistas_por_like.id AND artistas_por_like.num_curtidas >= 2 GROUP BY artistas_por_like.nome_artistico ORDER BY media DESC;"
+	makeViewArtistas()
+	try:
+		cur.execute(sql_run)
+		for media in cur:
+			print( unicode( unicode(media[0]) + ",  " + unicode(media[1]) ) )
+	except Exception as e:
+		print("Falha na pesquisa")
+		print e
+	conn.commit()
+	cur.close()
+
+def ratingFilmes():
+	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+	sql_run = "SELECT ROUND(AVG(like_filmes.nota),3) AS Media, filmes_por_like.id FROM like_filmes, filmes_por_like WHERE like_filmes.id = filmes_por_like.id AND filmes_por_like.num_curtidas >=2 GROUP BY filmes_por_like.id ORDER BY media DESC;"
+	makeViewFilmes()
+	try:
+		cur.execute(sql_run) #Executa a query.
+		for media in cur:
+			print(unicode(unicode(media[0]) + ",  " + unicode(media[1])))
+	except Exception as e:
+		print("Falha na pesquisa")
+		print e
+	conn.commit()
+	cur.close()
+
+def top10Artistas():
+	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+	sql_run = "SELECT ROUND(AVG(like_artista.nota),3) AS Media, artistas_por_like.nome_artistico FROM like_artista, artistas_por_like WHERE  like_artista.id = artistas_por_like.id AND artistas_por_like.num_curtidas >= 2 GROUP BY artistas_por_like.nome_artistico ORDER BY Media DESC LIMIT 10;"
+	makeViewFilmes()
+	try:
+		cur.execute(sql_run)
+		for media in cur:
+			print(unicode(unicode(media[0]) + ",  " + unicode(media[1])))
+	except Exception as e:
+		print("Falha na pesquisa")
+		print e
+	conn.commit()
+	cur.close()
+
+def top10Filmes():
+	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+	sql_run = "SELECT ROUND(AVG(like_filmes.nota),3) AS Media, filmes_por_like.id FROM like_filmes, filmes_por_like WHERE like_filmes.id = filmes_por_like.id AND filmes_por_like.num_curtidas >=2 GROUP BY (filmes_por_like.id)  ORDER BY media DESC LIMIT 10;"
+	makeViewFilmes()
+	try:
+		cur.execute(sql_run)
+		for media in cur:
+			print(unicode(unicode(media[0]) + ",  " + unicode(media[1])))
+	except Exception as e:
+		print("Falha na pesquisa")
+		print e
+	conn.commit()
+	cur.close()
 #Variáveis de controle de menu.
 end = False;
 menu = True;
@@ -152,9 +233,37 @@ while menu and not end:
 			else:
 				print("Digite uma opção válida!")
 	elif option=="3":
-		print("Quais são os artistas e filmes com o maior rating médio curtidos por pelo menos duas pessoas? Ordenados por rating médio.")
+		menu_in = True;
+		while menu_in:
+			print("O que deseja fazer agora?")
+			print("1 - Voltar. \n")
+			print("2 - Obter Artistas Musicais com maior rating médio (2 pessoas ou + que avaliaram, apenas).")
+			print("3 - Obter Filmes com maior rating médio (2 pessoas ou + que avaliaram, apenas).")
+			option = raw_input("O que deseja fazer?")
+			if option=="1":
+				menu_in = False;
+			elif option=="2":
+				ratingArtistas()
+			elif option=="3":
+				ratingFilmes()
+			else:
+				print("Digite uma opção válida!")
 	elif option=="4":
-		print("Quais são os 10 artistas musicais e filmes mais populares? Ordenados por popularidade.")
+		menu_in = True;
+		while menu_in:
+			print("O que deseja fazer agora?")
+			print("1 - Voltar. \n")
+			print("2 - Obter TOP 10 Artistas Musicais com maior rating médio (2 pessoas ou + que avaliaram, apenas).")
+			print("3 - Obter TOP 10 Filmes com maior rating médio (2 pessoas ou + que avaliaram, apenas).")
+			option = raw_input("O que deseja fazer?")
+			if option=="1":
+				menu_in = False;
+			elif option=="2":
+				top10Artistas()
+			elif option=="3":
+				top10Filmes()
+			else:
+				print("Digite uma opção válida!")
 	elif option=="5":
 		print("Crie uma view chamada ConheceNormalizada que represente simetricamente os relacionamentos de conhecidos da turma. Por exemplo, se a conhece b mas b não declarou conhecer a, a view criada deve conter o relacionamento (b,a) além de (a,b).")
 	elif option=="6":
