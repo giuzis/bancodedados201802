@@ -184,6 +184,34 @@ def top10Filmes():
 		print e
 	conn.commit()
 	cur.close()
+
+def bot10Artistas():
+	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+	sql_run = "SELECT ROUND(AVG(like_artista.nota),3) AS Media, artistas_por_like.nome_artistico FROM like_artista, artistas_por_like WHERE  like_artista.id = artistas_por_like.id AND artistas_por_like.num_curtidas >= 2 GROUP BY artistas_por_like.nome_artistico ORDER BY Media LIMIT 10;"
+	makeViewFilmes()
+	try:
+		cur.execute(sql_run)
+		for media in cur:
+			print(unicode(unicode(media[0]) + ",  " + unicode(media[1])))
+	except Exception as e:
+		print("Falha na pesquisa")
+		print e
+	conn.commit()
+	cur.close()
+
+def bot10Filmes():
+	cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+	sql_run = "SELECT ROUND(AVG(like_filmes.nota),3) AS Media, filmes_por_like.id FROM like_filmes, filmes_por_like WHERE like_filmes.id = filmes_por_like.id AND filmes_por_like.num_curtidas >=2 GROUP BY (filmes_por_like.id)  ORDER BY media LIMIT 10;"
+	makeViewFilmes()
+	try:
+		cur.execute(sql_run)
+		for media in cur:
+			print(unicode(unicode(media[0]) + ",  " + unicode(media[1])))
+	except Exception as e:
+		print("Falha na pesquisa")
+		print e
+	conn.commit()
+	cur.close()
 #Variáveis de controle de menu.
 end = False;
 menu = True;
@@ -207,8 +235,8 @@ while menu and not end:
 	print("7 - Descubre os conhecidos dos seus conhecidos. ")
 	print("8 - Gráfico: Filmes vs Curtidas ")
 	print("9 - Gráfico: Quantidade de filmes curtidos vs Pessoas ")
-	print("10 - Opção extra 01 ")
-	print("11 - Opção extra 02 ")
+	print("10 - TOP 10 Artistas Musicais menos populares")
+	print("11 - TOP 10 Filmes menos populares ")
 	option = raw_input("Selecione a opção desejada: ")
 	if option=="1":
 		print("\n Fechando o programa... \n")
@@ -277,9 +305,11 @@ while menu and not end:
     		print("Construa um gráfico para a função f(x) = (número de filmes curtidos por exatamente x pessoas).")
     		graficoPessoasFilmes()
 	elif option=="10":
-		print("Defina duas outras informações (como as anteriores) que seriam úteis para compreender melhor a rede. Agregue estas informações à sua aplicação.")
+		print("TOP 10 Artistas Musicais com menor rating médio (2 pessoas ou + que avaliaram, apenas).")
+		bot10Artistas()
 	elif option=="11":
-		print("batata")
+		print("TOP 10 Filmes com menor rating médio (2 pessoas ou + que avaliaram, apenas).")
+		bot10Filmes()
 	else:
 		print("Digite uma opção válida!")
 
