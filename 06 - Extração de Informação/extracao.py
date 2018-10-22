@@ -2,7 +2,8 @@ import json
 import urllib
 import urllib2
 import psycopg2
-import psycopg2.extras 
+import psycopg2.extras
+from bs4 import BeautifulSoup
 
 url = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&rvsection=0&titles=Alestorm&format=json"
 response = urllib.urlopen(url)
@@ -27,7 +28,7 @@ print nome[inicionome+2:fimnome]
 if string2.find("origin"):
 	if string2.find("origin") > 0:
 		if string2.find("birth_place"):
-			if string2.find("origin") < string2.find("birth_place"):	
+			if string2.find("origin") < string2.find("birth_place"):
 				indicepaisini = string2.find("origin")
 				indicepaisfim = indicepaisini + len("origin")
 			else:
@@ -55,7 +56,7 @@ count = 0
 for c in novonovoorigem:
 	if c == ",":
 		count+=1
-print count 
+print count
 if count == 1:
 	cidade,pais = novonovoorigem.split(",")
 if count == 2:
