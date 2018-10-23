@@ -129,6 +129,7 @@ try:
 				genero = genero.replace("]","")
 				genero = genero.replace(" = hlist|","")
 				genero = genero[0:genero.find("|")]
+				genero = genero.replace("\n","")
 
 			listamusicas.append("https://en.wikipedia.org/wiki/" + nomes[0] + "|" + nome + "|" + cidade + "|" + pais + "|" + genero)
 		else:
@@ -196,6 +197,7 @@ try:
 				genero = genero.replace("]","")
 				genero = genero.replace(" = hlist|","")
 				genero = genero[0:genero.find("|")]
+				genero = genero.replace("\n","")
 
 			listamusicas.append("https://en.wikipedia.org/wiki/" + nomes[0] + "|" + nome + "|" + cidade + "|" + pais + "|" + genero)
 
