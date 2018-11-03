@@ -1,0 +1,87 @@
+<Movies>
+	<Movie id="0266543" nome = "Finding Nemo" categoria = "Animation" ano_lancamento = "2003" diretor = "Andrew Stanton" />
+	<Movie id="0120586" nome = "American History X" categoria = "Crime" ano_lancamento = "1998" diretor = "Tony Kaye" />
+	<Movie id="0169547" nome = "American Beauty" categoria = "Drama" ano_lancamento = "1999" diretor = "Sam Mendes" />
+	<Movie id="0105236" nome = "Reservoir Dogs" categoria = "Crime" ano_lancamento = "1992" diretor = "Quentin Tarantino" />
+	<Movie id="0361748" nome = "Inglourious Basterds" categoria = "Adventure" ano_lancamento = "2009" diretor = "Quentin Tarantino" />
+	<Movie id="0401792" nome = "Sin City" categoria = "Crime" ano_lancamento = "2005" diretor = "Frank Miller" />
+	<Movie id="0796366" nome = "Star Trek" categoria = "Action" ano_lancamento = "2009" diretor = "J.J. Abrams" />
+	<Movie id="0109830" nome = "Forrest Gump" categoria = "Drama" ano_lancamento = "1994" diretor = "Robert Zemeckis" />
+	<Movie id="0102926" nome = "The Silence of the Lambs" categoria = "Crime" ano_lancamento = "1991" diretor = "Jonathan Demme" />
+	<Movie id="0325980" nome = "Pirates of the Caribbean: The Curse of the Black Pearl" categoria = "Action" ano_lancamento = "2003" diretor = "Gore Verbinski" />
+	<Movie id="0903624" nome = "The Hobbit: An Unexpected Journey" categoria = "Adventure" ano_lancamento = "2012" diretor = "Peter Jackson" />
+	<Movie id="1201607" nome = "Harry Potter and the Deathly Hallows: Part 2" categoria = "Adventure" ano_lancamento = "2011" diretor = "David Yates" />
+	<Movie id="0086190" nome = "Star Wars: Episode VI - Return of the Jedi" categoria = "Action" ano_lancamento = "1983" diretor = "Richard Marquand" />
+	<Movie id="0266697" nome = "Kill Bill: Vol. 1" categoria = "Action" ano_lancamento = "2003" diretor = "Quentin Tarantino" />
+	<Movie id="0096283" nome = "My Neighbor Totoro" categoria = "Animation" ano_lancamento = "1988" diretor = "Hayao Miyazaki" />
+	<Movie id="0454876" nome = "Life of Pi" categoria = "Adventure" ano_lancamento = "2012" diretor = "Ang Lee" />
+	<Movie id="0108052" nome = "Schindlers List" categoria = "Biography" ano_lancamento = "1993" diretor = "Steven Spielberg" />
+	<Movie id="0372784" nome = "Batman Begins" categoria = "Action" ano_lancamento = "2005" diretor = "Christopher Nolan" />
+	<Movie id="1220719" nome = "Ip Man" categoria = "Action" ano_lancamento = "2008" diretor = "Wilson Yip" />
+	<Movie id="0198781" nome = "Monsters, Inc." categoria = "Animation" ano_lancamento = "2001" diretor = "Pete Docter" />
+	<Movie id="0440963" nome = "The Bourne Ultimatum" categoria = "Action" ano_lancamento = "2007" diretor = "Paul Greengrass" />
+	<Movie id="0114709" nome = "Toy Story" categoria = "Animation" ano_lancamento = "1995" diretor = "John Lasseter" />
+	<Movie id="0947798" nome = "Black Swan" categoria = "Drama" ano_lancamento = "2010" diretor = "Darren Aronofsky" />
+	<Movie id="0071853" nome = "Monty Python and the Holy Grail" categoria = "Adventure" ano_lancamento = "1975" diretor = "Terry Gilliam" />
+	<Movie id="0180093" nome = "Requiem for a Dream" categoria = "Drama" ano_lancamento = "2000" diretor = "Darren Aronofsky" />
+	<Movie id="0338013" nome = "Eternal Sunshine of the Spotless Mind" categoria = "Drama" ano_lancamento = "2004" diretor = "Michel Gondry" />
+	<Movie id="0111161" nome = "The Shawshank Redemption" categoria = "Drama" ano_lancamento = "1994" diretor = "Frank Darabont" />
+	<Movie id="0110912" nome = "Pulp Fiction" categoria = "Crime" ano_lancamento = "1994" diretor = "Quentin Tarantino" />
+	<Movie id="0071562" nome = "The Godfather: Part II" categoria = "Crime" ano_lancamento = "1974" diretor = "Francis Ford Coppola" />
+	<Movie id="0088763" nome = "Back to the Future" categoria = "Adventure" ano_lancamento = "1985" diretor = "Robert Zemeckis" />
+	<Movie id="0167260" nome = "The Lord of the Rings: The Return of the King" categoria = "Action" ano_lancamento = "2003" diretor = "Peter Jackson" />
+	<Movie id="0211915" nome = "Amélie" categoria = "Comedy" ano_lancamento = "2001" diretor = "Jean-Pierre Jeunet" />
+	<Movie id="0062622" nome = "2001: A Space Odyssey" categoria = "Adventure" ano_lancamento = "1968" diretor = "Stanley Kubrick" />
+	<Movie id="0468569" nome = "The Dark Knight" categoria = "Action" ano_lancamento = "2008" diretor = "Christopher Nolan" />
+	<Movie id="0434409" nome = "V for Vendetta" categoria = "Action" ano_lancamento = "2005" diretor = "James McTeigue" />
+	<Movie id="1375666" nome = "Inception" categoria = "Action" ano_lancamento = "2010" diretor = "Christopher Nolan" />
+	<Movie id="0099685" nome = "Goodfellas" categoria = "Crime" ano_lancamento = "1990" diretor = "Martin Scorsese" />
+	<Movie id="0133093" nome = "The Matrix" categoria = "Action" ano_lancamento = "1999" diretor = "Lana Wachowski" />
+	<Movie id="0317248" nome = "City of God" categoria = "Crime" ano_lancamento = "2002" diretor = "Fernando Meirelles" />
+	<Movie id="0120737" nome = "The Lord of the Rings: The Fellowship of the Ring" categoria = "Adventure" ano_lancamento = "2001" diretor = "Peter Jackson" />
+	<Movie id="0167261" nome = "The Lord of the Rings: The Two Towers" categoria = "Adventure" ano_lancamento = "2002" diretor = "Peter Jackson" />
+	<Movie id="0075314" nome = "Taxi Driver" categoria = "Crime" ano_lancamento = "1976" diretor = "Martin Scorsese" />
+	<Movie id="0078748" nome = "Alien" categoria = "Horror" ano_lancamento = "1979" diretor = "Ridley Scott" />
+	<Movie id="0172495" nome = "Gladiator" categoria = "Action" ano_lancamento = "2000" diretor = "Ridley Scott" />
+	<Movie id="0364569" nome = "Oldboy" categoria = "Action" ano_lancamento = "2003" diretor = "Chan-wook Park" />
+	<Movie id="0848228" nome = "The Avengers" categoria = "Action" ano_lancamento = "2012" diretor = "Joss Whedon" />
+	<Movie id="1345836" nome = "The Dark Knight Rises" categoria = "Action" ano_lancamento = "2012" diretor = "Christopher Nolan" />
+	<Movie id="1853728" nome = "Django Unchained" categoria = "Drama" ano_lancamento = "2012" diretor = "Quentin Tarantino" />
+	<Movie id="0068646" nome = "The Godfather" categoria = "Crime" ano_lancamento = "1972" diretor = "Francis Ford Coppola" />
+	<Movie id="1136608" nome = "District 9" categoria = "Sci-Fi" ano_lancamento = "2009" diretor = "Neill Blomkamp" />
+	<Movie id="0246578" nome = "Donnie Darko" categoria = "Drama" ano_lancamento = "2001" diretor = "Richard Kelly" />
+	<Movie id="0114369" nome = "Se7en" categoria = "Crime" ano_lancamento = "1995" diretor = "David Fincher" />
+	<Movie id="0075148" nome = "Rocky" categoria = "Drama" ano_lancamento = "1976" diretor = "John G. Avildsen" />
+	<Movie id="0435761" nome = "Toy Story 3" categoria = "Animation" ano_lancamento = "2010" diretor = "Lee Unkrich" />
+	<Movie id="0110357" nome = "The Lion King" categoria = "Animation" ano_lancamento = "1994" diretor = "Roger Allers" />
+	<Movie id="0045152" nome = "Singin in the Rain" categoria = "Comedy" ano_lancamento = "1952" diretor = "Stanley Donen" />
+	<Movie id="0097576" nome = "Indiana Jones and the Last Crusade" categoria = "Action" ano_lancamento = "1989" diretor = "Steven Spielberg" />
+	<Movie id="0268978" nome = "A Beautiful Mind" categoria = "Biography" ano_lancamento = "2001" diretor = "Ron Howard" />
+	<Movie id="0070047" nome = "The Exorcist" categoria = "Horror" ano_lancamento = "1973" diretor = "William Friedkin" />
+	<Movie id="0338564" nome = "Infernal Affairs" categoria = "Crime" ano_lancamento = "2002" diretor = "Wai-Keung Lau" />
+	<Movie id="0382932" nome = "Ratatouille" categoria = "Animation" ano_lancamento = "2007" diretor = "Brad Bird" />
+	<Movie id="0107290" nome = "Jurassic Park" categoria = "Adventure" ano_lancamento = "1993" diretor = "Steven Spielberg" />
+	<Movie id="0137523" nome = "Fight Club" categoria = "Drama" ano_lancamento = "1999" diretor = "David Fincher" />
+	<Movie id="0080684" nome = "Star Wars: Episode V - The Empire Strikes Back" categoria = "Action" ano_lancamento = "1980" diretor = "Irvin Kershner" />
+	<Movie id="0082971" nome = "Raiders of the Lost Ark" categoria = "Action" ano_lancamento = "1981" diretor = "Steven Spielberg" />
+	<Movie id="0209144" nome = "Memento" categoria = "Mystery" ano_lancamento = "2000" diretor = "Christopher Nolan" />
+	<Movie id="0095327" nome = "Grave of the Fireflies" categoria = "Animation" ano_lancamento = "1988" diretor = "Isao Takahata" />
+	<Movie id="0110413" nome = "Léon: The Professional" categoria = "Crime" ano_lancamento = "1994" diretor = "Luc Besson" />
+	<Movie id="0910970" nome = "WALL·E" categoria = "Animation" ano_lancamento = "2008" diretor = "Andrew Stanton" />
+	<Movie id="0086250" nome = "Scarface" categoria = "Crime" ano_lancamento = "1983" diretor = "Brian De Palma" />
+	<Movie id="0103064" nome = "Terminator 2: Judgment Day" categoria = "Action" ano_lancamento = "1991" diretor = "James Cameron" />
+	<Movie id="0047478" nome = "Seven Samurai" categoria = "Adventure" ano_lancamento = "1954" diretor = "Akira Kurosawa" />
+	<Movie id="0245429" nome = "Spirited Away" categoria = "Animation" ano_lancamento = "2001" diretor = "Hayao Miyazaki" />
+	<Movie id="0081505" nome = "The Shining" categoria = "Drama" ano_lancamento = "1980" diretor = "Stanley Kubrick" />
+	<Movie id="0076759" nome = "Star Wars: Episode IV - A New Hope" categoria = "Action" ano_lancamento = "1977" diretor = "George Lucas" />
+	<Movie id="1675434" nome = "The Intouchables" categoria = "Biography" ano_lancamento = "2011" diretor = "Olivier Nakache" />
+	<Movie id="1130884" nome = "Shutter Island" categoria = "Mystery" ano_lancamento = "2010" diretor = "Martin Scorsese" />
+	<Movie id="0758758" nome = "Into the Wild" categoria = "Adventure" ano_lancamento = "2007" diretor = "Sean Penn" />
+	<Movie id="0101414" nome = "Beauty and the Beast" categoria = "Animation" ano_lancamento = "1991" diretor = "Gary Trousdale" />
+	<Movie id="0034583" nome = "Casablanca" categoria = "Drama" ano_lancamento = "1942" diretor = "Michael Curtiz" />
+	<Movie id="0120382" nome = "The Truman Show" categoria = "Comedy" ano_lancamento = "1998" diretor = "Peter Weir" />
+	<Movie id="1049413" nome = "Up" categoria = "Animation" ano_lancamento = "2009" diretor = "Pete Docter" />
+	<Movie id="0050986" nome = "Wild Strawberries" categoria = "Drama" ano_lancamento = "1957" diretor = "Ingmar Bergman" />
+	<Movie id="0088247" nome = "The Terminator" categoria = "Action" ano_lancamento = "1984" diretor = "James Cameron" />
+	<Movie id="0078788" nome = "Apocalypse Now" categoria = "Drama" ano_lancamento = "1979" diretor = "Francis Ford Coppola" />
+</Movies>
