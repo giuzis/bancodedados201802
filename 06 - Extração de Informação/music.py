@@ -11,6 +11,9 @@ except:
 	print "Falha ao se conectar ao banco de dados. Terminando o programa..."
 	end = True
 
+arquivo = open("music.xml","w")
+arquivo.write('<Musics>\n')
+
 listamusicas = []
 cur = conn.cursor()
 try:
@@ -86,15 +89,25 @@ try:
 				if c == ",":
 					count+=1
 			if count == 0:
-				cidade = "NULL"
+				cidade = ""
 				pais = " " + pais
 			if count == 1:
 				cidade,pais = pais.split(",")
 			elif count == 2:
 				cidade,estado,pais = pais.split(",")
 			else:
-				pais = "NULL"
+				pais = ""
 			pais = pais[1:len(pais)]
+			if cidade.find("(") != -1:
+				cidade = cidade[0:cidade.find("(")]
+			if cidade.find("{") != -1:
+				cidade = cidade[0:cidade.find("{")]
+			if pais.find("{") != -1:
+				pais = pais[0:pais.find("{")]
+			if pais.find("}") != -1:
+				pais = pais[0:pais.find("}")]
+			if pais.find(">") != -1:
+				pais = ""
 
 			if cantor.find("genre") != -1:
 				iniciogenero = cantor.find("genre") + len("genre")
@@ -121,6 +134,10 @@ try:
 				genero = genero.replace("]","")
 				if genero.find("|") != -1:
 					genero = genero[0:genero.find("|")]
+				if genero.find("<") != -1:
+						genero = genero[0:genero.find("<")]
+				if genero.find(",") != -1:
+						genero = genero[0:genero.find(",")]
 			else:
 				genero = cantor
 				genero = genero.replace("{","")
@@ -130,8 +147,55 @@ try:
 				genero = genero.replace(" = hlist|","")
 				genero = genero[0:genero.find("|")]
 				genero = genero.replace("\n","")
+				genero = genero.replace("=","")
+				genero = genero.replace("	","")
+				try:
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+				except:
+					print "problemas"
+				if genero.find("<") != -1:
+						genero = genero[0:genero.find("<")]
+				if genero.find(",") != -1:
+						genero = genero[0:genero.find(",")]
 
-			listamusicas.append("https://en.wikipedia.org/wiki/" + nomes[0] + "|" + nome + "|" + cidade + "|" + pais + "|" + genero)
+			listamusicas.append("\t<Music id = https://en.wikipedia.org/wiki/" + nomes[0] + " nome = " + nome + " cidade = " + cidade + " pais = " + pais + " genero = " + genero + " />\n")
 		else:
 			banda = string2
 			inicionome = banda.find("name") + len("name")
@@ -154,15 +218,25 @@ try:
 				if c == ",":
 					count+=1
 			if count == 0:
-				cidade = "NULL"
+				cidade = ""
 				pais = " " + pais
 			elif count == 1:
 				cidade,pais = pais.split(",")
 			elif count == 2:
 				cidade,estado,pais = pais.split(",")
 			else:
-				pais = "NULL"
+				pais = ""
 			pais = pais[1:len(pais)]
+			if cidade.find("(") != -1:
+				cidade = cidade[0:cidade.find("(")]
+			if cidade.find("{") != -1:
+				cidade = cidade[0:cidade.find("{")]
+			if pais.find("{") != -1:
+				pais = pais[0:pais.find("{")]
+			if pais.find("}") != -1:
+				pais = pais[0:pais.find("}")]
+			if pais.find(">") != -1:
+				pais = ""
 
 			if banda.find("genre") != -1:
 				iniciogenero = banda.find("genre") + len("genre")
@@ -189,6 +263,10 @@ try:
 				genero = genero.replace("]","")
 				if genero.find("|") != -1:
 					genero = genero[0:genero.find("|")]
+				if genero.find("<") != -1:
+						genero = genero[0:genero.find("<")]
+				if genero.find(",") != -1:
+						genero = genero[0:genero.find(",")]
 			else:
 				genero = banda
 				genero = genero.replace("{","")
@@ -198,12 +276,61 @@ try:
 				genero = genero.replace(" = hlist|","")
 				genero = genero[0:genero.find("|")]
 				genero = genero.replace("\n","")
+				genero = genero.replace("=","")
+				genero = genero.replace("	","")
+				try:
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+					if genero[0] == " ":
+						genero = genero[1:len(genero)]
+				except:
+					continue
+				if genero.find("<") != -1:
+						genero = genero[0:genero.find("<")]
+				if genero.find(",") != -1:
+						genero = genero[0:genero.find(",")]
 
-			listamusicas.append("https://en.wikipedia.org/wiki/" + nomes[0] + "|" + nome + "|" + cidade + "|" + pais + "|" + genero)
+			listamusicas.append("\t<Music id = https://en.wikipedia.org/wiki/" + nomes[0] + " nome = " + nome + " cidade = " + cidade + " pais = " + pais + " genero = " + genero + " />\n")
 
 except Exception as e: 
 	print e
 
-file = open("musicas.csv",'w')
 for linha in listamusicas:
-	file.write("%s\n" % linha.encode('utf-8'))
+	arquivo.write(linha.encode('utf-8'))
+
+arquivo.write('</Musics>')
+arquivo.close()
