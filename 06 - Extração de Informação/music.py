@@ -195,7 +195,7 @@ try:
 				if genero.find(",") != -1:
 						genero = genero[0:genero.find(",")]
 
-			listamusicas.append("\t<Music id = https://en.wikipedia.org/wiki/" + nomes[0] + " nome = " + nome + " cidade = " + cidade + " pais = " + pais + " genero = " + genero + " />\n")
+			listamusicas.append("\t<Music id =" + "\"" + "https://en.wikipedia.org/wiki/" + nomes[0] + "\"" + " nome = " + "\"" + nome + "\"" + " cidade = " + "\"" + cidade + "\"" + " pais = " + "\"" + pais + "\"" + " genero = " + "\"" + genero + "\"" + " />\n")
 		else:
 			banda = string2
 			inicionome = banda.find("name") + len("name")
@@ -324,7 +324,7 @@ try:
 				if genero.find(",") != -1:
 						genero = genero[0:genero.find(",")]
 
-			listamusicas.append("\t<Music id = https://en.wikipedia.org/wiki/" + nomes[0] + " nome = " + nome + " cidade = " + cidade + " pais = " + pais + " genero = " + genero + " />\n")
+			listamusicas.append("\t<Music id =" + "\"" + "https://en.wikipedia.org/wiki/" + nomes[0] + "\"" + " nome = " + "\"" + nome + "\"" + " cidade = " + "\"" + cidade + "\"" + " pais = " + "\"" + pais + "\"" + " genero = " + "\"" + genero + "\"" + " />\n")
 
 except Exception as e: 
 	print e
