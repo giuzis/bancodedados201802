@@ -1,0 +1,6 @@
+Clusterização
+	- Filmes: utilizar para recomendação de filmes
+	- Músicas: Recomendar amigos
+PEsquisar:
+	- k-means (clusterização)
+	- Distância de Jaqcard (recomendação)
