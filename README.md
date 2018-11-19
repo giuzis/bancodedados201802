@@ -52,3 +52,13 @@ Para cada integrante do grupo, preencha os campos abaixo:
     Nenhuma
 - Qual aspecto do trabalho te interessa mais?
 -   Machine Learning
+
+
+- Nome: Alexandre Matias
+
+- Qual o seu foco na implementação do trabalho?
+    - Implementar o K-means e ajudar na recomendação de amizade
+- Já teve alguma experiência com as tecnologias que serão usadas no trabalho? Quais?
+    - Nunca cheguei a utilizar
+- Qual aspecto do trabalho te interessa mais?
+    - Clustering e sistemas de recomendação
