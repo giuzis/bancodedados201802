@@ -1,54 +1,54 @@
+# Estrutura bÃ¡sica do trabalho de CSB30 - IntroduÃ§Ã£o A Bancos De Dados
 
-# Estrutura básica do trabalho de CSB30 - Introdução A Bancos De Dados
-
-Modifique este aquivo README.md com as informações adequadas sobre o seu grupo.
+Modifique este aquivo README.md com as informaÃ§Ãµes adequadas sobre o seu grupo.
 
 ## Integrantes do grupo
 
-Liste o nome, RA e o usuário GitLab para cada integrante do grupo.
+Liste o nome, RA e o usuÃ¡rio GitLab para cada integrante do grupo.
 
 - Alexandre Herrero Matias, 1890484, Matias0159
 - Giuliana Martins Silva, 1450557, giulianamartins
 - Matheus Fonseca Alexandre de Oliveira, 1794027, mathFonseca
 
-## Descrição da aplicação a ser desenvolvida 
+## DescriÃ§Ã£o da aplicaÃ§Ã£o a ser desenvolvida 
 
-Descreva aqui uma visão geral da aplicação que será desenvolvida pelo grupo durante o semestre. **Este texto deverá ser escrito quando requisitado pelo professor.** O conteúdo vai evoluir à medida em que o grupo avança com a implementação.
+Descreva aqui uma visÃ£o geral da aplicaÃ§Ã£o que serÃ¡ desenvolvida pelo grupo durante o semestre. **Este texto deverÃ¡ ser escrito quando requisitado pelo professor.** O conteÃºdo vai evoluir Ã  medida em que o grupo avanÃ§a com a implementaÃ§Ã£o.
 
-- O que vocês vão implementar
-	Clusterização de pessoas de acordo com filmes curtidos e mpusicas e recomendação de amigos
+- O que vocÃªs vÃ£o implementar
+	ClusterizaÃ§Ã£o de pessoas de acordo com filmes curtidos e mpusicas e recomendaÃ§Ã£o de amigos
 
 
-- Quais tecnologias vão utilizar
-	K-means, Distância de Jacquard
+- Quais tecnologias vÃ£o utilizar
+	K-means, DistÃ¢ncia de Jacquard
 
 - Por que decidiram pelo tema
-	Uma inspiração foi as bússolas políticas que se tornaram virais nos últimos tempos.
+	Uma inspiraÃ§Ã£o foi as bÃºssolas polÃ­ticas que se tornaram virais nos Ãºltimos tempos.
 
 
 - Quais os desafios relacionados com bancos de dados (consultas, modelos, etc.)
-	A clusterização de forma geral.
+	A clusterizaÃ§Ã£o de forma geral.
 
 
-- Quais os desafios relacionados com suas áreas de interesse
+- Quais os desafios relacionados com suas Ã¡reas de interesse
 	Aprender como funciona machine learning
 
 
-- Quais conhecimentos novos vocês pretendem adquirir
+- Quais conhecimentos novos vocÃªs pretendem adquirir
 	Machine learning 
 
 
-- O que vocês já produziram (protótipos, esquemas de telas, teste de codificação de partes críticas, etc.)
-	Interface com o usuário e compilação de informações que serão utilizadas
+- O que vocÃªs jÃ¡ produziram (protÃ³tipos, esquemas de telas, teste de codificaÃ§Ã£o de partes crÃ­ticas, etc.)
+	Interface com o usuÃ¡rio e compilaÃ§Ã£o de informaÃ§Ãµes que serÃ£o utilizadas
 
 
 Para cada integrante do grupo, preencha os campos abaixo:
 
 
-- Nome:
+- Nome: Matheus Fonseca
 
-- Qual o seu foco na implementação do trabalho?
-
-- Já teve alguma experiência com as tecnologias que serão usadas no trabalho? Quais?
-
+- Qual o seu foco na implementaÃ§Ã£o do trabalho?
+    Implementar a Distancia de Jaccard.
+- JÃ¡ teve alguma experiÃªncia com as tecnologias que serÃ£o usadas no trabalho? Quais?
+    Nenhuma
 - Qual aspecto do trabalho te interessa mais?
+-   Machine Learning
