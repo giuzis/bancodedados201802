@@ -45,20 +45,18 @@ Para cada integrante do grupo, preencha os campos abaixo:
 
 
 - Nome: Matheus Fonseca
-
-- Qual o seu foco na implementação do trabalho?
-    - Implementar a Distancia de Jaccard.
-- Já teve alguma experiência com as tecnologias que serão usadas no trabalho? Quais?
-    - Nenhuma
-- Qual aspecto do trabalho te interessa mais?
--   - Machine Learning
+    - Qual o seu foco na implementação do trabalho?
+        - Implementar a Distancia de Jaccard.
+    - Já teve alguma experiência com as tecnologias que serão usadas no trabalho? Quais?
+        - Nenhuma
+    - Qual aspecto do trabalho te interessa mais?
+        - Machine Learning
 
 
 - Nome: Alexandre Matias
-
-- Qual o seu foco na implementação do trabalho?
-    - Implementar o K-means e ajudar na recomendação de amizade
-- Já teve alguma experiência com as tecnologias que serão usadas no trabalho? Quais?
-    - Nunca cheguei a utilizar
-- Qual aspecto do trabalho te interessa mais?
-    - Clustering e sistemas de recomendação
+    - Qual o seu foco na implementação do trabalho?
+        - Implementar o K-means e ajudar na recomendação de amizade
+    - Já teve alguma experiência com as tecnologias que serão usadas no trabalho? Quais?
+        - Nunca cheguei a utilizar
+    - Qual aspecto do trabalho te interessa mais?
+        - Clustering e sistemas de recomendação
