@@ -60,3 +60,11 @@ Para cada integrante do grupo, preencha os campos abaixo:
         - Nunca cheguei a utilizar
     - Qual aspecto do trabalho te interessa mais?
         - Clustering e sistemas de recomendação
+ 
+- Nome: Giuliana Martins
+    - Qual o seu foco na implementação do trabalho?
+        - Implementar o K-means e ajudar na recomendação de amizade
+    - Já teve alguma experiência com as tecnologias que serão usadas no trabalho? Quais?
+        - Não
+    - Qual aspecto do trabalho te interessa mais?
+        - Clustering e machine learning        
