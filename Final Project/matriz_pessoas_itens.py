@@ -28,14 +28,14 @@ def obtemNumeroDeUsuarios(conn):
 #Essa view sera usada para fazer a associacao de um artista a um numero
 def criaViewNumArtista(conn):
 	cur = conn.cursor()
-	consulta = str("create or replace view num_artista as select row_number() over(order by artista_musical) as num, id from artista_musical;");
+	consulta = str("create or replace view num_artista as select -1+row_number() over(order by artista_musical) as num, id from artista_musical;");
 	cur.execute(consulta)
 	cur.close()
 
 #Essa view sera usada para fazer a associacao de um usuario a um numero
 def criaViewNumUsuario(conn):
 	cur = conn.cursor()
-	consulta = str("create or replace view num_usuario as select row_number() over(order by pessoa) as num, login from pessoa;");
+	consulta = str("create or replace view num_usuario as select -1+row_number() over(order by pessoa) as num, login from pessoa;");
 	cur.execute(consulta)
 	cur.close()
 
@@ -44,6 +44,7 @@ def criaMatrizUsuarioArtista(conn):
 	usuario_artista = np.zeros((obtemNumeroDeUsuarios(conn),obtemNumeroDeArtistas(conn)))
 	return usuario_artista;
 
+#Utiliza as views criadas para preencher a matriz com as notas dadas pelos usuarios
 def preencheMatrizUsuarioArtista(conn, num_usuario, usuario_artista):
     cur = conn.cursor()
     for user in range(1,num_usuario):
@@ -52,4 +53,4 @@ def preencheMatrizUsuarioArtista(conn, num_usuario, usuario_artista):
         cur.execute(consulta)
         notas = cur.fetchall()
         for i in notas:
-            usuario_artista[user][i[0]] = i[1]
+            usuario_artista[user-1][i[0]-1] = i[1]
