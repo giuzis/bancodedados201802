@@ -56,6 +56,6 @@ def preencheMatrizUsuarioArtista(conn, num_usuario, usuario_artista):
         cur.execute(consulta)
         notas = cur.fetchall()
         for i in notas:
-            usuario_artista[user][i[0]-1] = i[1]
+            usuario_artista[user][i[0]] = i[1]
     cur.close()
     return usuario_artista;
