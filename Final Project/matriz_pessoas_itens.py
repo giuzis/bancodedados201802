@@ -102,6 +102,6 @@ def preencheMatrizUsuariosxFilmes(conn, num_usuario, usuario_filme):
         notas = cur.fetchall()
         for j in notas:
             usuario_filme[usuario][j[0]] = j[1]
-        cur.close()
-        return usuario_filme;
+    cur.close()
+    return usuario_filme;
 
