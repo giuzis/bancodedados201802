@@ -41,16 +41,21 @@ def criaViewNumUsuario(conn):
 
 #Cria Matriz UsuarioArtista
 def criaMatrizUsuarioArtista(conn):
-	usuario_artista = np.zeros((obtemNumeroDeUsuarios(conn),obtemNumeroDeArtistas(conn)))
+	num_usuario = obtemNumeroDeUsuarios(conn)
+	num_artista = obtemNumeroDeArtistas(conn)
+	usuario_artista = np.zeros((num_usuario,num_artista))
+
 	return usuario_artista;
 
 #Utiliza as views criadas para preencher a matriz com as notas dadas pelos usuarios
 def preencheMatrizUsuarioArtista(conn, num_usuario, usuario_artista):
     cur = conn.cursor()
-    for user in range(1,num_usuario):
+    for user in range(0,num_usuario):
         consulta = str("select a.num as num_artista, l.nota as nota from like_artista l, num_usuario u, num_artista a where u.num = user and u.login = l.login and l.id = a.id;")
         consulta = consulta.replace("user", str(user))
         cur.execute(consulta)
         notas = cur.fetchall()
         for i in notas:
-            usuario_artista[user-1][i[0]-1] = i[1]
+            usuario_artista[user][i[0]-1] = i[1]
+    cur.close()
+    return usuario_artista;
