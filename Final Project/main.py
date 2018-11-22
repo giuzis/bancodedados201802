@@ -128,7 +128,7 @@ def similaridade(usuarioA,usuarioB,usuario_filmes,num_filmes):
 	userA = set()
 	userB = set()
 	for filme in range(0, num_filmes):
-		print("Iteração" + str(filme))
+		#print("Iteração" + str(filme))
 		if (usuario_filmes[usuarioA][filme] == usuario_filmes[usuarioB][filme] and usuario_filmes[usuarioA][filme]!=0):
 			comum += 1
 			#print(comum)
@@ -138,18 +138,21 @@ def similaridade(usuarioA,usuarioB,usuario_filmes,num_filmes):
 			userB.add(filme)
 			#print(userA)
 			#print(userB)
+		if comum!=0 and usuarioA!=usuarioB and usuarioA==1 and usuarioB==10:
+			print(comum, usuarioA, usuarioB)
+			print(userA,userB)
 	total = len(userA | userB)
 	if total == 0:
 		return 0;
-	elif():
-		similaridade = comum/total
-		return similaridade;
+	similaridade = comum/total
+	return similaridade;
 #Função para padronizar as notas de 0 a 5 para 0, 1 ou 2.
 def padronização(dimensao1,dimensao2,matriz):
 	for i in range(0,dimensao1):
 		for j in range(0,dimensao2):
 			if matriz[i][j] == 5 or matriz[i][j] == 4:
 				matriz[i][j] = 2
+				#Se a nota for 5 ou 4, recebe nota máxima padronizada, ou seja, 2.
 			elif matriz[i][j] == 3 or matriz[i][j] == 2 or matriz[i][j] == 1:
 				matriz[i][j] = 1
 	return matriz;
