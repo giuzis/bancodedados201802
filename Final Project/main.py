@@ -131,20 +131,28 @@ def similaridade(usuarioA,usuarioB,usuario_filmes,num_filmes):
 		print("Iteração" + str(filme))
 		if (usuario_filmes[usuarioA][filme] == usuario_filmes[usuarioB][filme] and usuario_filmes[usuarioA][filme]!=0):
 			comum += 1
-			print(comum)
+			#print(comum)
 		if usuario_filmes[usuarioA][filme]!=0 and usuario_filmes[usuarioB][filme]!=0:
-			print(filme)
+			#print(filme)
 			userA.add(filme)
 			userB.add(filme)
-			print(userA)
-			print(userB)
+			#print(userA)
+			#print(userB)
 	total = len(userA | userB)
 	if total == 0:
 		return 0;
 	elif():
 		similaridade = comum/total
 		return similaridade;
-
+#Função para padronizar as notas de 0 a 5 para 0, 1 ou 2.
+def padronização(dimensao1,dimensao2,matriz):
+	for i in range(0,dimensao1):
+		for j in range(0,dimensao2):
+			if matriz[i][j] == 5 or matriz[i][j] == 4:
+				matriz[i][j] = 2
+			elif matriz[i][j] == 3 or matriz[i][j] == 2 or matriz[i][j] == 1:
+				matriz[i][j] = 1
+	return matriz;
 #---------------------------------
 #Inicio do programa. Now the animal catches.
 
@@ -165,5 +173,7 @@ numero_artistas = obtemNumeroDeArtistas(conn)
 matriz_usuarios_filmes = preencheMatrizUsuariosxFilmes(conn,numero_usuarios,matriz_usuarios_filmes)
 matriz_usuarios_artistas = preencheMatrizUsuarioArtista(conn,numero_usuarios,matriz_usuarios_artistas)
 
+#Padroniza as matrizes para o padrão de notas [0 a 5] para [0 a 2]
+matriz_usuarios_filmes = padronização(numero_usuarios,numero_filmes,matriz_usuarios_filmes)
 #Busca similaridade de todos com todos e preenche na matriz Usuario x Usuario.
 matriz_usuarios_usuarios = preencheMatrizUsuariosxUsuarios(conn,numero_usuarios,numero_filmes,matriz_usuarios_usuarios,matriz_usuarios_filmes)
