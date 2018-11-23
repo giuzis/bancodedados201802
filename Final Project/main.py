@@ -79,10 +79,14 @@ def criaMatrizUsuariosxFilmes(conn):
 	num_filmes = encontraNumeroFilmes(conn)
 	usuario_filme = np.zeros((num_usuario,num_filmes))
 	return usuario_filme;
-
-def criaMatrizUsuarioxUsuario(conn):
+#Cria o Hypercubo Usuario x Usuario x Conjunto.
+def criaHypercuboUsuarioxUsuario(conn):
 	num_usuario = obtemNumeroDeUsuarios(conn)
-	usuario_usuario = np.zeros((num_usuario,num_usuario))
+	usuario_usuario = np.zeros((num_usuario,num_usuario,3))
+	#Na terceira* dimensão, tem-se:
+	#[0], similaridade
+	#[1], set(A)
+	#[2], set(B)
 	return usuario_usuario;
 
 #Utiliza as views criadas para preencher a matriz com as notas dadas pelos usuarios
@@ -114,31 +118,61 @@ def preencheMatrizUsuariosxFilmes(conn, num_usuario, usuario_filme):
 #Preenche a matriz com os dados de similaridade a cada dupla de usuários.
 #similaridade de (A,B) e (B,A) são iguais.
 #similaridade de (A,A) é 100% (1). E distância 0.
-def preencheMatrizUsuariosxUsuarios(conn, num_usuario, num_filmes, usuario_usuario, usuario_filmes):
+def preencheHypercuboUsuariosxUsuarios(conn, num_usuario, num_filmes, usuario_usuario, usuario_filmes):
 	cur = conn.cursor()
 	for userA in range(0,num_usuario):
 		for userB in range(0,num_usuario):
-			usuario_usuario[userA][userB] = similaridade(userA,userB,usuario_filmes,num_filmes)
+			usuario_usuario = similaridade(userA,userB,usuario_filmes,num_filmes,num_usuario,usuario_usuario)
+			#usuario_usuario[userA][userB][0] = similaridade(userA,userB,usuario_filmes,num_filmes)
 	return usuario_usuario;
 
-def similaridade(usuarioA,usuarioB,usuario_filmes,num_filmes):
+def similaridade(usuarioA,usuarioB,usuario_filmes,num_filmes,num_usuario,usuario_usuario):
 	#UsuarioA e UsuarioB são os números dos usuários que se quer achar a similaridade.
 	#Usuario_filmes é a matriz preenchida de Usuários x Filmes
-	comum = 0
 	userA = set()
 	userB = set()
+	usuario_usuario[usuarioA][usuarioB][1] = userA
+	usuario_usuario[usuarioA][usuarioB][2] = set()
 	for filme in range(0, num_filmes):
+		#Parte 1 - Calcula Filmes em comum entre A e B.
+		if((usuario_filmes[usuarioA][filme] == usuario_filmes[usuarioB][filme]) and (usuario_filmes[usuarioA][filme]!=0 or usuario_filmes[usuarioB][filme]!=0)):
+			#Os dois dão a mesma nota, e a nota não é zero.
+			usuario_usuario[usuarioA][usuarioB][1].add(filme)
+			usuario_usuario[usuarioA][usuarioB][2].add(filme)
+		elif(usuario_filmes[usuarioA][filme]!=usuario_filmes[usuarioB][filme] and usuario_filmes[usuarioA][filme]!=0):
+			#São notas diferentes. Preenche em A os filmes que não forem 0.
+			usuario_usuario[usuarioA][usuarioB][1].add(filme)
+		elif(usuario_filmes[usuarioA][filme]!=usuario_filmes[usuarioB][filme] and usuario_filmes[usuarioB][filme]!=0):
+			#São notas diferentes. Preenche em B os filmes que não forem 0.
+			usuario_usuario[usuarioA][usuarioB][2].add(filme)
+	distância = distanciaJaccard(usuario_usuario[usuarioA][usuarioB][1],usuario_usuario[usuarioA][usuarioB][2])
+	return usuario_usuario;
+"""
+		#Preenche filmes diferentes de 0 para o usuario A no set de A.
+		if(usuario_filmes[usuarioA][filme]!=0):
+			userA.add(filme)
+			#Preenche o set de A para todas as pessoas.
+			#Seria melhor com ponteiro eu diria.
+			for j in range(0,num_usuario)
+			usuario_usuario[usuarioA][j][1].add(filme)
+
+		#Preenche filmes diferentes de 0 para o usuario B no set de B.
+		if(usuario_filmes[usuarioB][filme][0]!=0):
+			usuario_filmes[usuarioB][filme][1]
+			userB.add(filme)
 		if ((usuario_filmes[usuarioA][filme] == usuario_filmes[usuarioB][filme]) and (usuario_filmes[usuarioA][filme]!=0 or usuario_filmes[usuarioB][filme]!=0)):
-			comum += 1
-		if (usuario_filmes[usuarioA][filme]!=0 and usuario_filmes[usuarioB][filme]!=0):
 			userA.add(filme)
 			userB.add(filme)
-	#União dos conjuntos de filmes de A e de B.
-	total = len(userA | userB)
+		if (usuario_filmes[usuarioA][filme]!=0) or usuario_filmes[usuarioB][filme]!=0):
+			userA.add(filme)
+			userB.add(filme)
+				total = len(userA | userB)
 	if total == 0:
 		return 0;
 	similaridade = comum/total
 	return similaridade;
+	União dos conjuntos de filmes de A e de B.
+"""
 #Função para padronizar as notas de 0 a 5 para 0, 1 ou 2.
 def padronizacao(dimensao1,dimensao2,matriz):
 	matriz_padronizada = np.zeros((dimensao1,dimensao2))
@@ -150,8 +184,10 @@ def padronizacao(dimensao1,dimensao2,matriz):
 			elif matriz[i][j] == 3 or matriz[i][j] == 2 or matriz[i][j] == 1:
 				matriz_padronizada[i][j] = 1
 	return matriz_padronizada;
+
+
 #Função para buscar informações de um par de usuários A,B
-def buscaUsuarioxUsuario(usuarioA,usuarioB,matriz_usuarios_usuarios,conn):
+def buscaSimilaridadeUsuarioxUsuario(usuarioA,usuarioB,matriz_usuarios_usuarios,conn):
 	cur = conn.cursor();
 	consultaA = "SELECT P.nome_completo FROM Pessoa P, num_usuario N WHERE N.num = userA AND P.login = N.login"
 	consultaB = "SELECT P.nome_completo FROM Pessoa P, num_usuario N WHERE N.num = userB AND P.login = N.login"
@@ -163,14 +199,18 @@ def buscaUsuarioxUsuario(usuarioA,usuarioB,matriz_usuarios_usuarios,conn):
 	cur = conn.cursor()
 	cur.execute(consultaB)
 	nome_usuarioB = cur.fetchall()
-	print(usuarioA,nome_usuarioA,usuarioB,nome_usuarioB)
-	similaridade = int(matriz_usuarios_usuarios[int(usuarioA)][int(usuarioB)])*100
-	print(usuarioA,usuarioB)
+	#print(usuarioA,nome_usuarioA,usuarioB,nome_usuarioB)
+	similaridade = float(matriz_usuarios_usuarios[int(usuarioA)][int(usuarioB)])*100
+	similaridade = round(similaridade,3)
+	"""print(matriz_usuarios_usuarios[int(usuarioA)][int(usuarioB)])
+	print(int(usuarioB))
+	print(similaridade)
+	print(usuarioA,usuarioB)"""
 	if usuarioA==usuarioB:
 		return print("São a mesma pessoa, similaridade é: 100%");
 	if usuarioA!=usuarioB:
-			return print("A similaridade entre " + str(nome_usuarioA) + " e entre " + str(nome_usuarioB) + " é de " + str(similaridade) + "%.");
-
+			return print("\nA similaridade entre " + str(nome_usuarioA) + " e entre " + str(nome_usuarioB) + " é de " + str(similaridade) + "%.\n");
+#round(number,places)
 
 #---------------------------------
 #Inicio do programa. Now the animal catches.
@@ -183,7 +223,7 @@ criaViewNumArtista(conn)
 #Criação das matrizes e seus parametros
 matriz_usuarios_filmes = criaMatrizUsuariosxFilmes(conn)
 matriz_usuarios_artistas = criaMatrizUsuarioArtista(conn)
-matriz_usuarios_usuarios = criaMatrizUsuarioxUsuario(conn)
+matriz_usuarios_usuarios = criaHypercuboUsuarioxUsuario(conn)
 numero_filmes = encontraNumeroFilmes(conn)
 numero_usuarios = obtemNumeroDeUsuarios(conn)
 numero_artistas = obtemNumeroDeArtistas(conn)
@@ -194,30 +234,33 @@ matriz_usuarios_artistas = preencheMatrizUsuarioArtista(conn,numero_usuarios,mat
 
 #Padroniza as matrizes para o padrão de notas [0 a 5] para [0 a 2]
 matriz_usuarios_filmes = padronizacao(numero_usuarios,numero_filmes,matriz_usuarios_filmes)
+
+
 #Busca similaridade de todos com todos e preenche na matriz Usuario x Usuario.
-matriz_usuarios_usuarios = preencheMatrizUsuariosxUsuarios(conn,numero_usuarios,numero_filmes,matriz_usuarios_usuarios,matriz_usuarios_filmes)
+matriz_usuarios_usuarios = preencheHypercuboUsuariosxUsuarios(conn,numero_usuarios,numero_filmes,matriz_usuarios_usuarios,matriz_usuarios_filmes)
 
 #Little Menu for Searching similarity among two users.
 """for i in range(0,numero_filmes):
 	print("Filme nº: " + str(i))
 	print(matriz_usuarios_filmes[10][i])
-	print(matriz_usuarios_filmes[4][i])"""
+	print(matriz_usuarios_filmes[4][i])
+	print(matriz_usuarios_usuarios[10][4])"""
 
-print(matriz_usuarios_usuarios[10][4])
-menu_on = False;
+menu_on = True;
+print("Bem vindo ao menu de busca por similaridade! Digite o número da opção que queira utilizar: ")
 while(menu_on):
-	print("Bem vindo ao menu de busca por similaridade! Digite o número da opção que queira utilizar: ")
-	print("1 - Buscar similaridade entre dois usuários (OBS: Atualmente, apenas leva em consideração os filmes em comum.")
+	print("1 - Buscar similaridade entre dois usuários \n(OBS: Atualmente, apenas leva em consideração os filmes em comum.")
 	print("2 - Sair do programa.")
 	option = input("Digite a opção desejada: ")
 	if option == "1":
-		print("Digite os números dos usuários que queria saber o grau de similaridade. \n Atualmente, esta similaridade está baseada nos filmes em que ambos os usuários curtiram ou não! ")
+		print("Digite os números dos usuários que queria saber o grau de similaridade. \nAtualmente, esta similaridade está baseada nos filmes em que ambos os usuários curtiram ou não! ")
 		userA = input("Digite o número do usuário 1: ")
 		userB = input("Digite o número do usuario 2: ")
-		buscaUsuarioxUsuario(userA,userB,matriz_usuarios_usuarios,conn);
-		print("Agora estou com preguiça de continuar funcionando. \n Contate o desenvolvedor para maiores informações. \n Desligando... ")
-		menu_on = False;
+		buscaSimilaridadeUsuarioxUsuario(userA,userB,matriz_usuarios_usuarios,conn);
+		#print("Agora estou com preguiça de continuar funcionando. \n Contate o desenvolvedor para maiores informações. \n Desligando... ")
+		#menu_on = False;
 	if option == "2":
 		print("Saindo...")
 		menu_on = False;
+print("Obrigado por utilizar o nosso sistema! Volte Sempre!")
 
