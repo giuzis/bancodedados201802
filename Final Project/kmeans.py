@@ -1,6 +1,7 @@
 import psycopg2
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
 
 try:
 	conn = psycopg2.connect("dbname='1802BandoDeDados' user='1802BandoDeDados' host='200.134.10.32' password='803322'")
@@ -12,11 +13,13 @@ cur2 = conn.cursor()
 
 x = []
 y = []
+logins = []
 i = 0
 
 try:
 	cur.execute("SELECT login FROM pessoa;")
 	for login in cur:
+		logins.append(login[0])
 		x.append(0)
 		y.append(0)
 		try:
@@ -80,17 +83,10 @@ try:
 except Exception as e:
 	print(e)
 
-posy = 0
-for coisa in x: 
-	print("(" + str(coisa) + ", " + str(y[posy]) + ")")
-	posy += 1
-
 fig, ax = plt.subplots()
 ax.set_xlim(-6,6)
 ax.set_ylim(-6,6)
 ax.set_aspect('equal')
-ax.axhline(y=0, color='#808080')
-ax.axvline(x=0, color='#808080')
 ax.plot(x, y, 'ro', color='#000000')
 ax.set_yticklabels([])
 ax.set_xticklabels([])
@@ -104,6 +100,7 @@ text2 = ax.annotate("POP", xy=(-0.5, -6), xytext=(-0.5, -6.5))
 text3 = ax.annotate("ROCK", xy=(-6, -0.2), xytext=(-7.5, -0.2))
 text4 = ax.annotate("HIP HOP", xy=(6, -0.2), xytext=(6.2, -0.2))
 pos = 0
+num = 0
 listax = []
 listay = []
 while pos <= 45:
@@ -111,13 +108,41 @@ while pos <= 45:
 	if pos > 0:
 		i = 0
 		for coisa in listax:
-			if(x[pos] == coisa and y[pos] == listay[i]):
+			if(x[pos] == listax[i] and y[pos] == listay[i]):
 				flag = 1
 				break
 			i += 1
 	if(flag == 0):
-		ax.text(x[pos] - 0.2, y[pos] + 0.25, str(pos + 1), fontsize=6)
-	listax.append(x[pos])
-	listay.append(y[pos])
+		ax.text(x[pos] - 0.2, y[pos] + 0.25, str(num + 1), fontsize=6)
+		listax.append(x[pos])
+		listay.append(y[pos])
+		print(logins[pos] + " - " + str(num + 1))
+		num += 1
 	pos += 1
+
+X = np.column_stack((listax, listay))
+print(X)
+
+kmeans = KMeans(n_clusters=4, random_state=0).fit(X)
+print(kmeans.labels_)
+
+fig, ax2 = plt.subplots()
+ax2.set_xlim(-6,6)
+ax2.set_ylim(-6,6)
+ax2.set_aspect('equal')
+ax2.set_yticklabels([])
+ax2.set_xticklabels([])
+i = 0
+for indice in kmeans.labels_:
+	if indice == 0:
+		ax2.plot(listax[i], listay[i], 'ro', color='#0000FF')
+	if indice == 1:
+		ax2.plot(listax[i], listay[i], 'ro', color='#FF0000')
+	if indice == 2:
+		ax2.plot(listax[i], listay[i], 'ro', color='#F9D307')
+	if indice == 3:
+		ax2.plot(listax[i], listay[i], 'ro', color='#00FF00')
+	i += 1
+ax2.grid(True, which='both')
+
 plt.show()
