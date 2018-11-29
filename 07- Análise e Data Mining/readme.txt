@@ -2,3 +2,9 @@ https://gitlab.com/Matias0159/db201802/tree/master/07-%20An%C3%A1lise%20e%20Data
 
 o arquivo de implementação do data mining é resposta07.py
 o arquivo pdf contendo as respostas é o resposta.pdf
+
+Trabalho final:
+os arquivos utilizados no trabalho final são:
+- recomendação_de_amigos.py
+- filmes.py
+- kmeans.py
